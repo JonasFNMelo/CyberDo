@@ -9,14 +9,25 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        VStack{
-            Text("Hello, World!")
-
+        
+        ScrollView{
+            
+            VStack(spacing: 50){
+                
+                Spacer()
+                OfencivaComponent(currentXP: 5, maxXP: 10)
+                
+                NivelComponent()
+                
+                MetasComponent()
+                
+            }
+            .ignoresSafeArea(.all)
         }
     }
-        
 }
 
 #Preview {
     ProfileView()
+    
 }
