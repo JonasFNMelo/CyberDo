@@ -29,9 +29,70 @@
 		9199CE2B2E24F70400AF600C /* CyberDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CyberDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9199CEEF2E25B9A100AF600C /* Exceptions for "CyberDo" folder in "CyberDoTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Font/Font.swift,
+				"Font/SF-Mono-BoldItalic.otf",
+				"Font/SF-Mono-Heavy.otf",
+				"Font/SF-Mono-HeavyItalic.otf",
+				"Font/SF-Mono-Light.otf",
+				"Font/SF-Mono-LightItalic.otf",
+				"Font/SF-Mono-MediumItalic.otf",
+				"Font/SF-Mono-RegularItalic.otf",
+				"Font/SF-Mono-SemiboldItalic.otf",
+				"Font/SFMono-Bold.otf",
+				"Font/SFMono-Medium.otf",
+				"Font/SFMono-Regular.otf",
+				"Font/SFMono-Semibold.otf",
+				"Font/SFNSMono 2.ttf",
+				"Font/SFNSMono 3.ttf",
+				Font/SFNSMono.ttf,
+				Font/SFNSMonoItalic.ttf,
+			);
+			target = 9199CE202E24F70400AF600C /* CyberDoTests */;
+		};
+		9199CEF02E25B9A100AF600C /* Exceptions for "CyberDo" folder in "CyberDoUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Font/Font.swift,
+				"Font/SF-Mono-BoldItalic.otf",
+				"Font/SF-Mono-Heavy.otf",
+				"Font/SF-Mono-HeavyItalic.otf",
+				"Font/SF-Mono-Light.otf",
+				"Font/SF-Mono-LightItalic.otf",
+				"Font/SF-Mono-MediumItalic.otf",
+				"Font/SF-Mono-RegularItalic.otf",
+				"Font/SF-Mono-SemiboldItalic.otf",
+				"Font/SFMono-Bold.otf",
+				"Font/SFMono-Medium.otf",
+				"Font/SFMono-Regular.otf",
+				"Font/SFMono-Semibold.otf",
+				"Font/SFNSMono 2.ttf",
+				"Font/SFNSMono 3.ttf",
+				Font/SFNSMono.ttf,
+				Font/SFNSMonoItalic.ttf,
+			);
+			target = 9199CE2A2E24F70400AF600C /* CyberDoUITests */;
+		};
+		9199CF2E2E25BE7400AF600C /* Exceptions for "CyberDo" folder in "CyberDo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9199CE132E24F70300AF600C /* CyberDo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9199CE162E24F70300AF600C /* CyberDo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9199CF2E2E25BE7400AF600C /* Exceptions for "CyberDo" folder in "CyberDo" target */,
+				9199CEEF2E25B9A100AF600C /* Exceptions for "CyberDo" folder in "CyberDoTests" target */,
+				9199CEF02E25B9A100AF600C /* Exceptions for "CyberDo" folder in "CyberDoUITests" target */,
+			);
 			path = CyberDo;
 			sourceTree = "<group>";
 		};
@@ -397,6 +458,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CyberDo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +486,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CyberDo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
