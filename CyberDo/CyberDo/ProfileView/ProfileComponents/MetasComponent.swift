@@ -21,7 +21,6 @@ struct MetasComponent: View {
             
             GraficoProgressoComponent(currentXP: 2, maxXP: 10, colorBar: .amarelo)
         }
-        
     }
 }
 

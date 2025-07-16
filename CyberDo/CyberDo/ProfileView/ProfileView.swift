@@ -9,20 +9,24 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        
         ScrollView{
             
             VStack(spacing: 50){
                 
-                Spacer()
+                HStack(){
+                    CabecalhoProfileComponent()
+                    Spacer()
+                }
+                
                 OfencivaComponent(currentXP: 5, maxXP: 10)
                 
                 NivelComponent()
+                    .padding(.top, -130)
                 
                 MetasComponent()
                 
             }
-            .ignoresSafeArea(.all)
+            .padding()
         }
     }
 }

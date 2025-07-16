@@ -51,7 +51,6 @@ struct NivelComponent: View {
             .font(.sfMono())
             .foregroundColor(.accentColor)
         }
-        .edgesIgnoringSafeArea([])
     }
 }
 
