@@ -10,25 +10,24 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-            VStack{
-                TabView {
-                    HomeView()
-                        .tabItem {
-                            Label("Home", systemImage: "house.fill")
-                        }
-                    AchivementView()
-                        .tabItem {
-                            Label("Achievements", systemImage: "medal")
-                        }
-                    
-                    ProfileView()
-                        .tabItem {
-                            Label("Profile", systemImage: "person.circle")
-                        }
+ 
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            AchivementView()
+                .tabItem {
+                    Label("Achievements", systemImage: "medal")
                 }
             
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.circle")
+                }
         }
-        .padding()
+        
+        
     }
 }
 

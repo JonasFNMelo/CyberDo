@@ -41,9 +41,12 @@ struct OfencivaComponent: View {
                 .foregroundColor(.vermelho)
                 .padding(.bottom, 20)
             
-            
+//            Rectangle()
+//                .frame(width: 280, height: 270)
+                
+
         }
-        .frame(width: 200, height: 100)
+        .frame(width: 280, height: 270)
     }
 }
 

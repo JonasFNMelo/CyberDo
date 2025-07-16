@@ -9,27 +9,29 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        VStack{
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-                        .font(.sfMono(fontStyle: .title ,fontWeight: .bold))
-                        .bold()
-        }
         
-        .onAppear{
-            debugfont()
+        ScrollView{
+            
+            VStack(spacing: 20){
+                
+                CabecalhoHomeComponent()
+                
+                CalendarioComponent()
+                
+                PikerComponent()
+                
+                QuestComponent(colorComponent: .accent)
+                
+                QuestComponent(colorComponent: .verde)
+                
+                QuestComponent(colorComponent: .azul)
+                
+            }
+            .padding()
         }
     }
 }
 
 #Preview {
     HomeView()
-}
-
-func debugfont(){
-    for NameFont in UIFont.familyNames{
-        print(NameFont)
-        for CharFont in UIFont.fontNames(forFamilyName: NameFont) {
-            print("---- \(CharFont)")
-        }
-    }
 }
