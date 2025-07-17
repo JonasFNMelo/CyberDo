@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @ObservedObject var toDoModel = ContentViewModel()
     var body: some View {
  
         TabView {
@@ -26,7 +26,9 @@ struct ContentView: View {
                     Label("Profile", systemImage: "person.circle")
                 }
         }
-        
+        .onAppear{
+            toDoModel.getToDo()
+        }
         
     }
 }

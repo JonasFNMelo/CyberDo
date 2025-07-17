@@ -15,6 +15,7 @@ struct CabecalhoConquistaComponent: View {
             
 
         }
+        .padding()
     }
 }
 

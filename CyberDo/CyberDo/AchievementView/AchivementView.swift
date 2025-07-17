@@ -9,10 +9,25 @@ import SwiftUI
 
 struct AchivementView: View {
     var body: some View {
-        VStack(alignment: .leading){
-            CabecalhoConquistaComponent()
-            
-            
+        ScrollView{
+            VStack(alignment: .leading){
+                CabecalhoConquistaComponent()
+                
+                VStack(spacing: 20){
+                    
+                    PikerConquistaComponent()
+                    
+                    ConquistaComponent(colorComponent: .verde)
+                    
+                    ConquistaComponent(colorComponent: .majenta)
+                    
+                    ConquistaComponent(colorComponent: .azul)
+                    
+                    ConquistaComponent(colorComponent: .vermelho)
+                    
+                    
+                }
+            }
         }
     }
 }
