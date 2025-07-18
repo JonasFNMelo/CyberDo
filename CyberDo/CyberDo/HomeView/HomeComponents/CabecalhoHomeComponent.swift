@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CabecalhoHomeComponent: View {
+    
+    @State var showModal = false
     var body: some View {
         HStack{
             
@@ -18,7 +20,7 @@ struct CabecalhoHomeComponent: View {
             Spacer()
             
             Button {
-                
+                showModal = true
             } label: {
                 Image(systemName: "plus")
                     .bold()
@@ -27,6 +29,9 @@ struct CabecalhoHomeComponent: View {
             }
             
             
+        }
+        .sheet(isPresented: $showModal){
+            ModalView()
         }
         
     }

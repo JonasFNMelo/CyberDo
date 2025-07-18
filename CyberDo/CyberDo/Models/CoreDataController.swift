@@ -38,14 +38,14 @@ class CoreDataController {
         }
     }
     
-    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String) -> ToDo {
+    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String) -> ToDo {
         let toDo = ToDo(context: viewContext)
         
         toDo.nome = nome
         toDo.descricao = descricao
         toDo.isDone = isDone
         toDo.categoria = categoria
-        
+        toDo.frequencia = frequencia
         
         saveContext()
         return toDo
