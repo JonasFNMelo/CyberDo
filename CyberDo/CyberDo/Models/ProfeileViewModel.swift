@@ -15,8 +15,8 @@ class ContentViewModel: ObservableObject {
         todos = CoreDataController.shared.fetchAllToDos()
     }
     
-    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String) {
-        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria)
+    func createToDo(nome: String, descricao: String, categoria: String, frequencia: String) {
+        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria, frequencia: frequencia)
         self.todos.append(result)
     }
     
