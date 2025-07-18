@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Representação visual das quests
 struct QuestComponent: View {
     
     @State var isComplete = false
@@ -17,6 +18,7 @@ struct QuestComponent: View {
     var body: some View {
         
         VStack{
+            //Retangulo superior do componente
             Rectangle()
                 .frame(width: 345, height: 60)
                 .opacity(0)
@@ -24,12 +26,13 @@ struct QuestComponent: View {
                 .overlay{
                     VStack{
                         HStack {
-                            
+                            //retangulo ao lado do nome/categoria (furutamente mudar para imagem)
                             Rectangle()
                                 .frame(width: 40, height: 40)
                                 .opacity(0)
                                 .border(colorComponent)
                             
+                            //Nome e categoria da Quest
                             VStack (alignment: .leading){
                                 Text("Nome da Tarefa")
                                     .font(.sfMono(fontWeight: .bold))
@@ -39,6 +42,7 @@ struct QuestComponent: View {
                             
                             Spacer()
                             
+                            //Botão para definir a conclusão da tarefa
                             Button {
                                 isComplete.toggle()
                             } label: {
@@ -68,7 +72,7 @@ struct QuestComponent: View {
                         
                     }
                 }
-            
+            //Retanguo inferior que contem a descrição da Quest
             Rectangle()
                 .frame(width: 345, height: 100)
                 .opacity(0)

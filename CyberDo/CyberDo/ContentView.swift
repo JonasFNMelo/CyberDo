@@ -7,10 +7,11 @@
 
 import SwiftUI
 
+/// ContentView é a "Main" do codigo, atraves dela é possivel acessar todas as telas e navegar com a tab bar
 struct ContentView: View {
-    @ObservedObject var toDoModel = ContentViewModel()
+    @ObservedObject var toDoModel = HomeViewModel()
     var body: some View {
- 
+ //Tab Bar
         TabView {
             HomeView()
                 .tabItem {

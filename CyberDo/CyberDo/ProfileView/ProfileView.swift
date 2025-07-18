@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Tela que mostra o status do player, sua evolucao, metas e ofenciva 
 struct ProfileView: View {
     var body: some View {
         ScrollView{

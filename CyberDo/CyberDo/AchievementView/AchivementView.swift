@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Tela responsavel por exibir ao usuario suas conquistas bloqueadas e desbloqueadas
 struct AchivementView: View {
     var body: some View {
         ScrollView{

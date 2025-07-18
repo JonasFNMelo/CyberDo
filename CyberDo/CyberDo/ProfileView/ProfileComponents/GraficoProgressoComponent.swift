@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Representação visual das metas
 struct GraficoProgressoComponent: View {
     
     
@@ -25,18 +26,21 @@ struct GraficoProgressoComponent: View {
         
         VStack (alignment: .leading){
             
+            //Titulo da meta
             Text("Fazer x quests da categoria 2")
                 .font(.sfMono(fontStyle: .headline, fontWeight: .bold))
                 .foregroundColor(colorBar)
 
             ZStack (alignment: .leading) {
                 
+                //Retangulo com baixa opacidade para mostrar progresso restante
                 Rectangle()
                     .cornerRadius(100)
                     .opacity(0.2)
                     .foregroundColor(colorBar)
                     .frame(width: 380, height: 15)
                 
+                //Retangulo com baixa opacidade para mostrar progresso que ja foi realizado
                 Rectangle()
                     .cornerRadius(100)
                     .foregroundColor(colorBar)

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Cabeçalho
 struct CabecalhoConquistaComponent: View {
     var body: some View {
         VStack(alignment: .leading){

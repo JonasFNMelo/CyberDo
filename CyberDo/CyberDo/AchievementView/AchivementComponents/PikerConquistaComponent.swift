@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Piker para filtrar conquistas
 struct PikerConquistaComponent: View {
     @State var num: Int = 0
     var body: some View {

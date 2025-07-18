@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+/// Extenção para adcionar a sfMono como font dentro do projeto
 extension Font {
     static func sfMono(fontStyle: Font.TextStyle = .body, fontWeight: Weight = .regular) -> Font {
         
@@ -14,6 +15,7 @@ extension Font {
     }
 }
 
+/// Extenção para modificar o textStyle da sfMono
 extension Font.TextStyle {
     var size: CGFloat {
         switch self {
@@ -33,6 +35,7 @@ extension Font.TextStyle {
     }
 }
 
+/// Enum para definir qual tipo da sfMono utilizar
 enum SFMonoFont: String {
     case regular = "SFMono-Regular"
     case medium = "SFMono-Medium"

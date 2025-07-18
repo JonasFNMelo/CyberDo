@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Componente responsavel por filtrar as quests que aparecem na tela com base em algumas categorias
 struct PikerComponent: View {
     @State var num: Int = 0
     var body: some View {
@@ -14,6 +15,7 @@ struct PikerComponent: View {
             
             Spacer()
             
+            //botão Main
             Button {
                 num = 0
             } label: {
@@ -34,7 +36,7 @@ struct PikerComponent: View {
             
             Spacer()
 
-
+            //botão Side
             Button {
                 num = 1
             } label: {
@@ -55,6 +57,7 @@ struct PikerComponent: View {
             
             Spacer()
 
+            //botão Events
             Button {
                 num = 2
             } label: {
@@ -76,6 +79,7 @@ struct PikerComponent: View {
             
             Spacer()
 
+            //botão Done
             Button {
                 num = 3
             } label: {

@@ -9,6 +9,7 @@
 import CoreData
 import Foundation
 
+/// Classe que controla o coreData
 class CoreDataController {
     static let shared = CoreDataController()
     
@@ -17,6 +18,7 @@ class CoreDataController {
         persistentContainer.viewContext
     }
     
+    /// Iniciador privado da classe, serve para acessar metodos sem instancia
     private init() {
         persistentContainer = NSPersistentContainer(name: "Model")
         
@@ -28,6 +30,7 @@ class CoreDataController {
         }
     }
     
+    /// Salva alterações no coreData
     func saveContext() {
         if viewContext.hasChanges {
             do {
@@ -38,6 +41,14 @@ class CoreDataController {
         }
     }
     
+    /// Cria um novo toDo no coreData
+    /// - Parameters:
+    ///   - nome: nome desse toDo
+    ///   - descricao: descrição desse toDo
+    ///   - isDone: estado do toDo (feito ou não)
+    ///   - categoria: Categoria do toDo
+    ///   - frequencia: Frequencia na qual esse toDo deve ser realizada
+    /// - Returns: Retorna esse mesmo toDo criado
     func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String) -> ToDo {
         let toDo = ToDo(context: viewContext)
         
@@ -51,6 +62,8 @@ class CoreDataController {
         return toDo
     }
     
+    /// Função responsavel por pegar todos os toDo guardados em memoria
+    /// - Returns: Retorna lista de toDos
     func fetchAllToDos() -> [ToDo] {
         let fetchRequest: NSFetchRequest<ToDo> = ToDo.fetchRequest()
         
@@ -63,6 +76,8 @@ class CoreDataController {
         }
     }
     
+    /// Função responsavel por remover um toDo expecifico
+    /// - Parameter todo: toDo a ser removido
     func deleteToDo(_ todo: ToDo) {
         viewContext.delete(todo)
         
