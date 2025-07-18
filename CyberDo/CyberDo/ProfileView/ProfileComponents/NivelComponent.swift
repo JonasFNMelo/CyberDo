@@ -7,14 +7,17 @@
 
 import SwiftUI
 
+/// Componente que é responsavel por mostrar ao usuario seus Status
 struct NivelComponent: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 10) {
             
+            //Titulo do componente
             Text("Nivel 5")
                 .font(.sfMono(fontStyle: .title, fontWeight: .bold))
             
+            // exibição dos atributos e dos seus respectiveis niveis 
             HStack (spacing: 10){
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Destreza")

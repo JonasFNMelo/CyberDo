@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 
+/// Arquivo principal que junta todos os componentes da tela home
 struct HomeView: View {
     var body: some View {
         

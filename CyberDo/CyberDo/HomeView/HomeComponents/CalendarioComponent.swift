@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Calendario responsavel por mostrar quais quests fazer em qual dia
 struct CalendarioComponent: View {
     
     @State private var date = Date()

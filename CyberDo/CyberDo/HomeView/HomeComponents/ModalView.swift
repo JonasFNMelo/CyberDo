@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+/// Sheet View responsavel por criar uma nova Quest
 struct ModalView: View {
     
     @Environment(\.presentationMode) var presentation
     
-    @ObservedObject var toDoModel = ContentViewModel()
+    @ObservedObject var toDoModel = HomeViewModel()
 
+    //Variaveis para serem ultilizadas na criação da quest
     @State private var nomeQ: String = ""
     @State private var frequencia: String = ""
     @State private var descricao: String = ""

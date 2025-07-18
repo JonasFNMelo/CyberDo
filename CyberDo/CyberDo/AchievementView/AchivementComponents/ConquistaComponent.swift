@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Componente que possibilita a viasualização das conquistas
 struct ConquistaComponent: View {
     
     @State var isComplete = false

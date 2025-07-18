@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Cabeçalho, com botao para criar uma nova quest
 struct CabecalhoHomeComponent: View {
     
     @State var showModal = false
