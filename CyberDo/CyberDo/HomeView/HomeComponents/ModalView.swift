@@ -10,388 +10,123 @@ import SwiftUI
 /// Sheet View responsavel por criar uma nova Quest
 struct ModalView: View {
     
+    @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentation
     
     @ObservedObject var toDoModel = HomeViewModel()
-
+    
+    
     //Variaveis para serem ultilizadas na criação da quest
     @State private var nomeQ: String = ""
     @State private var frequencia: String = ""
     @State private var descricao: String = ""
     @State private var categoria: String = ""
-
-
-
+    @State private var prioridade: String = ""
+    
+    
+    
     var body: some View {
-        VStack(alignment: .leading,spacing: 20){
-            
-            Text("Nova Quest")
-                .font(.sfMono(fontStyle: .largeTitle,fontWeight: .bold))
-            
-            Text("Digite o nome da Quest:")
-                .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
-
-            TextField("Digite aqui", text: $nomeQ)
-            
-            Text("Digite o Descrição da Quest:")
-                .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
-
-            TextField("Digite aqui", text: $descricao)
-            
-            Text("Escolha a frequencia da Quest")
-                .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
-
-            
-            HStack{
+        NavigationStack{
+            VStack(alignment: .leading,spacing: 20){
                 
-                Spacer()
+//                Text(categoria)
+//                Text(frequencia)
+//                Text(nomeQ)
+//                Text(descricao)
+
+                Text("Nova Quest")
+                    .font(.sfMono(fontStyle: .largeTitle,fontWeight: .bold))
                 
-                Button {
-                    frequencia = "diariamente"
-                } label: {
-                    if frequencia != "diariamente"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 120,height: 40)
-                                .cornerRadius(15)
-                            Text("Diariamente")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 120,height: 40)
-                                .cornerRadius(15)
-                            Text("Diariamente")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.70)
+                Text("Digite o nome da Quest:")
+                    .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
+                
+                TextField("Digite aqui", text: $nomeQ)
+                
+                Text("Digite o Descrição da Quest:")
+                    .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
+                
+                TextField("Digite aqui", text: $descricao)
+                
+                Text("Escolha a frequencia da Quest")
+                    .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
+                
+                
+                Grid{
+                    GridRow{
+                        ButtonSheet(valor: $frequencia, tamanho: 120, texto: "diariamente", colorComponent: .accent)
+                    
+                        ButtonSheet(valor: $frequencia, tamanho: 130, texto: "semanalmente", colorComponent: .accent)
+                    
+                        ButtonSheet(valor: $frequencia, tamanho: 120, texto: "mensalmente", colorComponent: .accent)
                     }
                 }
                 
-                Spacer()
-
-                Button {
-                    frequencia = "semanalmente"
-                } label: {
-                    if frequencia != "semanalmente"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 130,height: 40)
-                                .cornerRadius(15)
-                            Text("Semanalmente")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 130,height: 40)
-                                .cornerRadius(15)
-                            Text("Semanalmente")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.70)
-                    }
-                }
+                Text("Escolha a categoria da Quest")
+                    .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
                 
                 
-                Spacer()
+                Grid{
+                    
+                 
+                    GridRow{
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Destresa", colorComponent: .majenta)
 
-                Button {
-                    frequencia = "mensalmente"
-                } label: {
-                    if frequencia != "mensalmente"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 120,height: 40)
-                                .cornerRadius(15)
-                            Text("Mensalmente")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 120,height: 40)
-                                .cornerRadius(15)
-                            Text("Mensalmente")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.70)
-                    }
-                }
-                
-                Spacer()
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Fé", colorComponent: .amarelo)
 
-            }
-            
-            Text("Escolha a categoria da Quest")
-                .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
+                        ButtonSheet(valor: $categoria, tamanho: 120, texto: "Resistencia", colorComponent: .vermelho)
 
-
-            HStack{
-                
-                Spacer()
-                
-                Button {
-                    categoria = "destresa"
-                } label: {
-                    if categoria != "destresa"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.majenta)
-                            Text("Destresa")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.majenta)
-                            Text("Destresa")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
-                    }
-                }
-                
-                Spacer()
-
-                Button {
-                    categoria = "fe"
-                } label: {
-                    if categoria != "fe"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.amarelo)
-                            
-                            Text("Fé")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.amarelo)
-                            
-                            Text("Fé")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
                     }
                     
-                }
-                Spacer()
+                    GridRow{
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Vitalidade", colorComponent: .verde)
 
-                Button {
-                    categoria = "resistencia"
-                } label: {
-                    if categoria != "resistencia"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.vermelho)
-                            
-                            Text("Resistecia")
-                                .foregroundStyle(.checkMark)
-                        }
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Sintonia", colorComponent: .majenta)
+                        
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Vigor", colorComponent: .verde)
                     }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.vermelho)
-                            
-                            Text("Resistecia")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
-                    }
-                }
-                Spacer()
+                    
+                    GridRow{
+                        ButtonSheet(valor: $categoria, tamanho: 130, texto: "Inteligencia", colorComponent: .azul)
 
-            }
-            
-            HStack{
-                
-                Spacer()
-                
-                Button {
-                    categoria = "vitalidade"
-                } label: {
-                    if categoria != "vitalidade"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.verde)
-                            
-                            Text("Vitalidade")
-                                .foregroundStyle(.checkMark)
-                        }
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Força", colorComponent: .vermelho)
                         
                     }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.verde)
-                            
-                            Text("Vitalidade")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
-                    }
                 }
                 
-                Spacer()
-
-                Button {
-                    categoria = "sintonia"
-                } label: {
-                    if categoria  != "sintonia"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.majenta)
-                            
-                            Text("Sintonia")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.majenta)
-                            
-                            Text("Sintonia")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
-                    }
-                }
+                Text("Escolha a prioridade da Quest")
+                    .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
                 
-                Spacer()
-
-                Button {
-                    categoria = "vigor"
-                } label: {
-                    if categoria != "vigor"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.verde)
-                            
-                            Text("Vigor")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.verde)
-                            
-                            Text("Vigor")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
+                Grid{
+                    GridRow{
+                        ButtonSheet(valor: $prioridade, tamanho: 120, texto: "Main", colorComponent: .vermelho)
+                        
+                        ButtonSheet(valor: $prioridade, tamanho: 120, texto: "Side", colorComponent: .amarelo)
                     }
                 }
-                Spacer()
-
             }
-            HStack{
-                
-                Spacer()
-                
-                Button {
-                    categoria = "inteligencia"
-                } label: {
-                    if categoria != "inteligencia"{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 130,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.azul)
-                            
-                            Text("Inteligencia")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 130,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.azul)
-                            
-                            Text("Inteligencia")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
+            .padding(.leading)
+            .font(.sfMono())
+            .toolbar{
+                ToolbarItem(placement: .confirmationAction){
+                    Button{
+                        dismiss()
+                    } label: {
+                        Text("Cancelar")
                     }
                 }
                 
-                Spacer()
-
-                Button {
-                    categoria = "forca"
-                } label: {
-                    if categoria != "forca" {
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.vermelho)
-                            
-                            Text("Força")
-                                .foregroundStyle(.checkMark)
-                        }
-                    }
-                    else{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 110,height: 40)
-                                .cornerRadius(15)
-                                .foregroundStyle(.vermelho)
-                            
-                            Text("Força")
-                                .foregroundStyle(.checkMark)
-                        }
-                        .opacity(0.7)
+                ToolbarItem(placement: .cancellationAction){
+                    Button {
+                        toDoModel.createToDo(nome: nomeQ, descricao: descricao, categoria: categoria, frequencia: frequencia, prioridade: prioridade)
+                        toDoModel.getToDo()
+                        dismiss()
+                        
+                    } label: {
+                        Text("Salvar")
                     }
                 }
-                Spacer()
-
-            }
-            
-            Button {
-                toDoModel.createToDo(nome: nomeQ, descricao: descricao, categoria: categoria, frequencia: frequencia)
-                presentation.wrappedValue.dismiss()
-            } label: {
-                Text("Salvar")
             }
         }
-        .font(.sfMono())
     }
 }
 

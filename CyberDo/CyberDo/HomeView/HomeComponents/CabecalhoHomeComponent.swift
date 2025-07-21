@@ -10,7 +10,7 @@ import SwiftUI
 /// Cabeçalho, com botao para criar uma nova quest
 struct CabecalhoHomeComponent: View {
     
-    @State var showModal = false
+    @Binding var showModal: Bool
     var body: some View {
         HStack{
             
@@ -39,5 +39,6 @@ struct CabecalhoHomeComponent: View {
 }
 
 #Preview {
-    CabecalhoHomeComponent()
+    @Previewable @State var showModal = false
+    CabecalhoHomeComponent(showModal: $showModal)
 }
