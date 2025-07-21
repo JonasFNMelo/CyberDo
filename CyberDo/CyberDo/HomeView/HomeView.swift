@@ -9,26 +9,34 @@ import SwiftUI
 
 /// Arquivo principal que junta todos os componentes da tela home
 struct HomeView: View {
+    
+    @ObservedObject var toDoModel = HomeViewModel()
+    @State var showModal = false
+
     var body: some View {
         
         ScrollView{
             
             VStack(spacing: 20){
                 
-                CabecalhoHomeComponent()
+                CabecalhoHomeComponent(showModal: $showModal)
                 
                 CalendarioComponent()
                 
                 PikerComponent()
                 
-                QuestComponent(colorComponent: .accent)
-                
-                QuestComponent(colorComponent: .verde)
-                
-                QuestComponent(colorComponent: .azul)
+                ForEach(toDoModel.toDos, id: \.self) { todos in
+                    QuestComponent(toDo: todos, colorComponent: .verde)
+                }
                 
             }
             .padding()
+            .onAppear{
+                toDoModel.getToDo()
+            }
+            .onChange(of: showModal){
+                toDoModel.getToDo()
+            }
         }
     }
 }

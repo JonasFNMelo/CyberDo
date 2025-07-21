@@ -10,7 +10,6 @@ import SwiftUI
 extension Font {
     static func sfMono(fontStyle: Font.TextStyle = .body, fontWeight: Weight = .regular) -> Font {
         
-        print("\(SFMonoFont(weight: fontWeight).rawValue), size: \(fontStyle.size)")
         return Font.custom(SFMonoFont(weight: fontWeight).rawValue, size: fontStyle.size)
     }
 }

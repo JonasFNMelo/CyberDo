@@ -20,7 +20,7 @@ class CoreDataController {
     
     /// Iniciador privado da classe, serve para acessar metodos sem instancia
     private init() {
-        persistentContainer = NSPersistentContainer(name: "Model")
+        persistentContainer = NSPersistentContainer(name: "CyberDoModel")
         
         persistentContainer.loadPersistentStores { _, error in
             if let error = error {
@@ -49,7 +49,7 @@ class CoreDataController {
     ///   - categoria: Categoria do toDo
     ///   - frequencia: Frequencia na qual esse toDo deve ser realizada
     /// - Returns: Retorna esse mesmo toDo criado
-    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String) -> ToDo {
+    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String, prioridade: String) -> ToDo {
         let toDo = ToDo(context: viewContext)
         
         toDo.nome = nome
@@ -57,7 +57,8 @@ class CoreDataController {
         toDo.isDone = isDone
         toDo.categoria = categoria
         toDo.frequencia = frequencia
-        
+        toDo.prioridade = prioridade
+                
         saveContext()
         return toDo
     }

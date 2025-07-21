@@ -10,11 +10,11 @@ import CoreData
 
 /// Classe responsavel por controlar os To Do da tela home
 class HomeViewModel: ObservableObject {
-    @Published var todos: [ToDo] = []
+    @Published var toDos: [ToDo] = []
     
     /// função responsavel por fazer o fetch de todos os toDo e salva-los na variavel todos
     func getToDo() {
-        todos = CoreDataController.shared.fetchAllToDos()
+        toDos = CoreDataController.shared.fetchAllToDos()
     }
     
     /// Cria um novo toDo no coreData
@@ -23,9 +23,9 @@ class HomeViewModel: ObservableObject {
     ///   - descricao: Descrição do ToDo
     ///   - categoria: Categoria do ToDo
     ///   - frequencia: Frequencia na qual esse ToDo deve ser feito
-    func createToDo(nome: String, descricao: String, categoria: String, frequencia: String) {
-        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria, frequencia: frequencia)
-        self.todos.append(result)
+    func createToDo(nome: String, descricao: String, categoria: String, frequencia: String, prioridade: String) {
+        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria, frequencia: frequencia, prioridade: prioridade)
+        self.toDos.append(result)
     }
     
     /// Deleta um toDo especifico

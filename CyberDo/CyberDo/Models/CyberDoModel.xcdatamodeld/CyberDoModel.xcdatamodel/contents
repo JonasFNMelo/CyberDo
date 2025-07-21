@@ -7,5 +7,6 @@
         <attribute name="frequencia" optional="YES" attributeType="String"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="nome" optional="YES" attributeType="String"/>
+        <attribute name="prioridade" optional="YES" attributeType="String"/>
     </entity>
 </model>
