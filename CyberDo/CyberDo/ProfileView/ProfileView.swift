@@ -19,7 +19,7 @@ struct ProfileView: View {
                     Spacer()
                 }
                 
-                OfencivaComponent(currentXP: 5, maxXP: 10)
+                OfencivaComponent(currentXP: 10, maxXP: 30)
                 
                 NivelComponent()
                     .padding(.top, -130)
