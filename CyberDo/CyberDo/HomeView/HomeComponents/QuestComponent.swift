@@ -13,9 +13,12 @@ struct QuestComponent: View {
     @ObservedObject var toDoModel = HomeViewModel()
 
     @State var toDo: ToDo
-    var colorComponent: Color
+    @State var colorComponent: Color
     @State private var bio = ""
 
+    @Binding var doneToDo: Bool
+    
+    
     var body: some View {
         if toDo.nome != nil{
             VStack{
@@ -45,8 +48,8 @@ struct QuestComponent: View {
                                 
                                 //Botão para definir a conclusão da tarefa
                                 Button {
+                                    doneToDo.toggle()
                                     toDoModel.toggleDone(toDo)
-                                    toDoModel.deleteToDo(toDo)
                                 } label: {
                                     if toDo.isDone == false{
                                         Rectangle()
@@ -86,7 +89,34 @@ struct QuestComponent: View {
                     }
                     .padding(.top, -9)
             }
+            .onAppear{
+                colorComponent = DefineColor()
+            }
             .foregroundColor(colorComponent)
+        }
+    }
+    func DefineColor() -> Color{
+        switch toDo.categoria {
+            case "Destreza":
+                return Color.majenta
+            case "Inteligência":
+                return Color.azul
+            case "Resistencia":
+                return Color.vermelho
+            case "Vitalidade":
+                return Color.verde
+            case "Sintonia":
+                return Color.majenta
+            case "Vigor":
+                return Color.verde
+            case "Fé":
+                return Color.amarelo
+            case "Força":
+                return Color.vermelho
+            
+            default:
+                return Color.verde
+
         }
     }
 }

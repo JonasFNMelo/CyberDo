@@ -14,9 +14,10 @@ struct GraficoProgressoComponent: View {
     
     @State var currentXP: Double
     
+    var titulo:String
     var maxXP: Double
-    
-    var colorBar: Color
+    @State var colorBar: Color = .verde
+    var categoria:String
     
     var progress: Double {
         min(currentXP / maxXP, 1.0)
@@ -27,7 +28,7 @@ struct GraficoProgressoComponent: View {
         VStack (alignment: .leading){
             
             //Titulo da meta
-            Text("Fazer x quests da categoria 2")
+            Text(titulo)
                 .font(.sfMono(fontStyle: .headline, fontWeight: .bold))
                 .foregroundColor(colorBar)
 
@@ -47,10 +48,37 @@ struct GraficoProgressoComponent: View {
                     .frame(width: 380 * progress, height: 15)
             }
         }
+        .onAppear{
+            colorBar = DefineColor()
+        }
+    }
+    func DefineColor() -> Color{
+        switch categoria {
+            case "Destreza":
+                return Color.majenta
+            case "Inteligência":
+                return Color.azul
+            case "Resistencia":
+                return Color.vermelho
+            case "Vitalidade":
+                return Color.verde
+            case "Sintonia":
+                return Color.majenta
+            case "Vigor":
+                return Color.verde
+            case "Fé":
+                return Color.amarelo
+            case "Força":
+                return Color.vermelho
+            
+            default:
+                return Color.verde
+
+        }
     }
 }
 
 
 #Preview {
-    GraficoProgressoComponent(currentXP: 5, maxXP: 10, colorBar: .verde)
+    GraficoProgressoComponent(currentXP: 5, titulo: "titulo da meta", maxXP: 10, categoria: "Fé")
 }

@@ -69,7 +69,7 @@ struct ModalView: View {
                     
                  
                     GridRow{
-                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Destresa", colorComponent: .majenta)
+                        ButtonSheet(valor: $categoria, tamanho: 110, texto: "Destreza", colorComponent: .majenta)
 
                         ButtonSheet(valor: $categoria, tamanho: 110, texto: "Fé", colorComponent: .amarelo)
 
@@ -86,7 +86,7 @@ struct ModalView: View {
                     }
                     
                     GridRow{
-                        ButtonSheet(valor: $categoria, tamanho: 130, texto: "Inteligencia", colorComponent: .azul)
+                        ButtonSheet(valor: $categoria, tamanho: 130, texto: "Inteligência", colorComponent: .azul)
 
                         ButtonSheet(valor: $categoria, tamanho: 110, texto: "Força", colorComponent: .vermelho)
                         
@@ -108,14 +108,6 @@ struct ModalView: View {
             .font(.sfMono())
             .toolbar{
                 ToolbarItem(placement: .confirmationAction){
-                    Button{
-                        dismiss()
-                    } label: {
-                        Text("Cancelar")
-                    }
-                }
-                
-                ToolbarItem(placement: .cancellationAction){
                     Button {
                         toDoModel.createToDo(nome: nomeQ, descricao: descricao, categoria: categoria, frequencia: frequencia, prioridade: prioridade)
                         toDoModel.getToDo()
@@ -123,6 +115,14 @@ struct ModalView: View {
                         
                     } label: {
                         Text("Salvar")
+                    }
+                }
+                
+                ToolbarItem(placement: .cancellationAction){
+                    Button{
+                        dismiss()
+                    } label: {
+                        Text("Cancelar")
                     }
                 }
             }

@@ -63,6 +63,20 @@ class CoreDataController {
         return toDo
     }
     
+    func creatMeta(xp: Double, titulo: String, maximo: Double, isDone: Bool, categoria:String, atual: Double) -> Metas {
+        let meta = Metas(context: viewContext)
+        
+        meta.xp = xp
+        meta.titulo = titulo
+        meta.maximo = maximo
+        meta.isDone = isDone
+        meta.categoria = categoria
+        meta.atual = atual
+        
+        saveContext()
+        return meta
+    }
+    
     /// Função responsavel por pegar todos os toDo guardados em memoria
     /// - Returns: Retorna lista de toDos
     func fetchAllToDos() -> [ToDo] {
@@ -77,10 +91,29 @@ class CoreDataController {
         }
     }
     
+    
+    func fetchAllMetas() -> [Metas] {
+        let fetchRequest: NSFetchRequest<Metas> = Metas.fetchRequest()
+        
+        do {
+            let result = try viewContext.fetch(fetchRequest)
+            return result
+        } catch {
+            print("Error fetching ToDos: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
     /// Função responsavel por remover um toDo expecifico
     /// - Parameter todo: toDo a ser removido
     func deleteToDo(_ todo: ToDo) {
         viewContext.delete(todo)
+        
+        saveContext()
+    }
+    
+    func deleteMeta(_ meta: Metas) {
+        viewContext.delete(meta)
         
         saveContext()
     }

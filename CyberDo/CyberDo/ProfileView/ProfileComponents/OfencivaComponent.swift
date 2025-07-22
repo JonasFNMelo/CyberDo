@@ -37,7 +37,7 @@ struct OfencivaComponent: View {
                 .rotationEffect(.degrees(180))
             
             // texto principal 
-            Text("OFENCIVA")
+            Text("OFENSIVA")
                 .font(.sfMono(fontStyle: .title, fontWeight: .bold))
                 .foregroundColor(.vermelho)
                 .padding(.bottom, 20)

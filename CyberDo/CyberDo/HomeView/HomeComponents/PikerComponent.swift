@@ -10,7 +10,11 @@ import SwiftUI
 /// Componente responsavel por filtrar as quests que aparecem na tela com base em algumas categorias
 struct PikerComponent: View {
     
-    @State var num: Int = 0
+    @Binding var filtro: String
+    @Binding var toDos: [ToDo]
+    @ObservedObject var toDoModel = HomeViewModel()
+    @Binding var showModal: Bool
+    @Binding var doneToDo: Bool
     
     var body: some View {
         
@@ -18,13 +22,14 @@ struct PikerComponent: View {
             GridRow{
                 //botão Main
                 Button {
-                    num = 0
+                    filtro = "Main"
+                    filtrarToDo()
                 } label: {
-                    if num%4 == 0 {
+                    if filtro == "Main" {
                         Text("Main")
                             .foregroundColor(.accent)
                     }
-                    if num%4 != 0 {
+                    if filtro != "Main" {
                         Text("Main")
                             .foregroundColor(.gray)
                     }
@@ -34,13 +39,14 @@ struct PikerComponent: View {
                 
                 //botão Side
                 Button {
-                    num = 1
+                    filtro = "Side"
+                    filtrarToDo()
                 } label: {
-                    if num%4 == 1 {
+                    if filtro == "Side" {
                         Text("Side")
                             .foregroundColor(.accent)
                     }
-                    if num%4 != 1 {
+                    if filtro != "Side" {
                         Text("Side")
                             .foregroundColor(.gray)
                     }
@@ -50,25 +56,54 @@ struct PikerComponent: View {
                 
                 //botão Done
                 Button {
-                    num = 3
+                    filtro = "Done"
+                    filtrarToDo()
                 } label: {
-                    if num%4 == 3 {
+                    if filtro == "Done" {
                         Text("Done")
                             .foregroundColor(.accent)
                     }
-                    if num%4 != 3 {
+                    if filtro != "Done" {
                         Text("Done")
                             .foregroundColor(.gray)
                     }
                 }
             }
             .font(.sfMono(fontStyle: .headline,fontWeight: .bold))
-
+        }
+        .onAppear(){
+            filtrarToDo()
+        }
+        .onChange(of: showModal){
+            filtrarToDo()
+        }
+        .onChange(of: doneToDo){
+            filtrarToDo()
         }
         .padding(10)
+    }
+    
+    func filtrarToDo(){
+        toDos.removeAll()
+        toDoModel.getToDo()
+        for tarefa in toDoModel.toDos{
+            if tarefa.prioridade == filtro && tarefa.isDone == false{
+                toDos.append(tarefa)
+            }
+            
+            if filtro == "Done"{
+                if tarefa.isDone == true{
+                    toDos.append(tarefa)
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    PikerComponent()
+    @Previewable @State var showModal = false
+    @Previewable @State var doneToDo = false
+    @Previewable @State var filtro = "Main"
+    @Previewable @State var toDos: [ToDo] = []
+    PikerComponent(filtro: $filtro, toDos: $toDos, showModal: $showModal, doneToDo: $doneToDo)
 }
