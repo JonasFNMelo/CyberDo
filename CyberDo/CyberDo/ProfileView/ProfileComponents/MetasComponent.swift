@@ -34,7 +34,7 @@ struct MetasComponent: View {
             }
             
             ForEach(metaModel.metas, id: \.self) { meta in
-                GraficoProgressoComponent(currentXP: meta.atual, titulo: meta.titulo!, maxXP: meta.maximo, categoria: meta.categoria!)
+                GraficoProgressoComponent(meta: meta)
             }
         }
         .onAppear{

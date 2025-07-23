@@ -13,7 +13,7 @@ struct MetaModalView: View {
     @Environment(\.presentationMode) var presentation
     
     @ObservedObject var metaModel = MetasModel()
-    
+
     //Variaveis para serem ultilizadas na criação da quest
     @State private var titulo: String = ""
     @State private var categoria: String = ""

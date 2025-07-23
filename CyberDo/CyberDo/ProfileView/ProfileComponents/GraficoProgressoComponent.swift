@@ -11,16 +11,20 @@ import SwiftUI
 struct GraficoProgressoComponent: View {
     
     
-    
-    @State var currentXP: Double
-    
-    var titulo:String
-    var maxXP: Double
+    @ObservedObject var toDoModel = HomeViewModel()
+    @ObservedObject var metaModel = MetasModel()
+
+//    @State var currentXP: Double
     @State var colorBar: Color = .verde
-    var categoria:String
+    @State var toDos: [ToDo] = []
     
+    var meta: Metas
+//    var titulo:String
+//    var maxXP: Double
+//    var categoria:String
+//    
     var progress: Double {
-        min(currentXP / maxXP, 1.0)
+        min(meta.atual / meta.maximo, 1.0)
     }
     
     var body: some View {
@@ -28,7 +32,7 @@ struct GraficoProgressoComponent: View {
         VStack (alignment: .leading){
             
             //Titulo da meta
-            Text(titulo)
+            Text(meta.titulo ?? "")
                 .font(.sfMono(fontStyle: .headline, fontWeight: .bold))
                 .foregroundColor(colorBar)
 
@@ -50,10 +54,12 @@ struct GraficoProgressoComponent: View {
         }
         .onAppear{
             colorBar = DefineColor()
+//            toDos = filterToDo()
+//            metaModel.addToDoInMeta(meta: meta, toDos: toDos)
         }
     }
     func DefineColor() -> Color{
-        switch categoria {
+        switch meta.categoria {
             case "Destreza":
                 return Color.majenta
             case "Inteligência":
@@ -76,9 +82,21 @@ struct GraficoProgressoComponent: View {
 
         }
     }
+    
+//    func filterToDo() -> [ToDo]{
+//        var todos: [ToDo] = []
+//        
+//        toDoModel.getToDo()
+//        for todo in toDoModel.toDos{
+//            if todo.categoria == meta.categoria{
+//                todos.append(todo)
+//            }
+//        }
+//        return todos
+//    }
 }
 
 
-#Preview {
-    GraficoProgressoComponent(currentXP: 5, titulo: "titulo da meta", maxXP: 10, categoria: "Fé")
-}
+//#Preview {  
+//    GraficoProgressoComponent()
+//}
