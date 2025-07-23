@@ -4,7 +4,7 @@
 //
 //  Created by Jonas Fernando Nascimento Melo on 15/07/25.
 //
-
+import CoreData
 import SwiftUI
 
 /// Componente onde o usuario pode acompanhar e criar novas metas
@@ -12,7 +12,6 @@ struct MetasComponent: View {
     
     @State var showModal: Bool = false
     @ObservedObject var metaModel = MetasModel()
-
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
 

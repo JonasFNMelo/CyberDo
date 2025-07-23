@@ -29,7 +29,6 @@ struct HomeView: View {
                 PikerComponent(filtro: $filtro, toDos: $toDos, showModal: $showModal, doneToDo: $doneToDo)
                 
                 ForEach(toDos, id: \.self) { todos in
-                    
                     QuestComponent(toDo: todos, colorComponent: .verde, doneToDo: $doneToDo)
                 }
             }

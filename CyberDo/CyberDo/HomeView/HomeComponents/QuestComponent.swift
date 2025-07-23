@@ -38,9 +38,9 @@ struct QuestComponent: View {
                                 
                                 //Nome e categoria da Quest
                                 VStack (alignment: .leading){
-                                    Text(toDo.nome ?? "")
+                                    Text(toDo.nome!)
                                         .font(.sfMono(fontWeight: .bold))
-                                    Text(toDo.categoria ?? "")
+                                    Text(toDo.categoria!)
                                         .font(.sfMono(fontStyle: .caption,fontWeight: .semibold))
                                 }
                                 

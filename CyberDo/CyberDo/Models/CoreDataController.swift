@@ -58,16 +58,43 @@ class CoreDataController {
         toDo.categoria = categoria
         toDo.frequencia = frequencia
         toDo.prioridade = prioridade
+        
                 
         saveContext()
         return toDo
     }
     
+    func creatMeta(xp: Double, titulo: String, maximo: Double, isDone: Bool, categoria:String, atual: Double) -> Metas {
+        let meta = Metas(context: viewContext)
+        
+        meta.xp = xp
+        meta.titulo = titulo
+        meta.maximo = maximo
+        meta.isDone = isDone
+        meta.categoria = categoria
+        meta.atual = atual
+        
+        saveContext()
+        return meta
+    }
     
     /// Função responsavel por pegar todos os toDo guardados em memoria
     /// - Returns: Retorna lista de toDos
     func fetchAllToDos() -> [ToDo] {
         let fetchRequest: NSFetchRequest<ToDo> = ToDo.fetchRequest()
+        
+        do {
+            let result = try viewContext.fetch(fetchRequest)
+            return result
+        } catch {
+            print("Error fetching ToDos: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    
+    func fetchAllMetas() -> [Metas] {
+        let fetchRequest: NSFetchRequest<Metas> = Metas.fetchRequest()
         
         do {
             let result = try viewContext.fetch(fetchRequest)
@@ -84,34 +111,6 @@ class CoreDataController {
         viewContext.delete(todo)
         
         saveContext()
-    }
-    
-    
-    
-    func creatMeta(xp: Double, titulo: String, maximo: Double, isDone: Bool, categoria:String, atual: Double) -> Metas {
-        let meta = Metas(context: viewContext)
-        
-        meta.xp = xp
-        meta.titulo = titulo
-        meta.maximo = maximo
-        meta.isDone = isDone
-        meta.categoria = categoria
-        meta.atual = atual
-        
-        saveContext()
-        return meta
-    }
-    
-    func fetchAllMetas() -> [Metas] {
-        let fetchRequest: NSFetchRequest<Metas> = Metas.fetchRequest()
-        
-        do {
-            let result = try viewContext.fetch(fetchRequest)
-            return result
-        } catch {
-            print("Error fetching ToDos: \(error.localizedDescription)")
-            return []
-        }
     }
     
     func deleteMeta(_ meta: Metas) {

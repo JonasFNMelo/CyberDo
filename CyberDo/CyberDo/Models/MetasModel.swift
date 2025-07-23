@@ -17,10 +17,9 @@ class MetasModel: ObservableObject {
         metas = CoreDataController.shared.fetchAllMetas()
     }
     
-   
     func createMeta(titulo: String, maximo: Double, categoria:String) {
         let result = CoreDataController.shared.creatMeta(xp: 100, titulo: titulo, maximo: maximo, isDone: false, categoria: categoria, atual: 0)
-//        result.toDos = [ToDo()]
+        
         self.metas.append(result)
     }
     
@@ -38,19 +37,31 @@ class MetasModel: ObservableObject {
         self.objectWillChange.send()
     }
     
-//    func addToDoInMeta(meta: Metas, toDos: [ToDo]){
-//        meta.toDos = toDos
-//        CoreDataController.shared.saveContext()
-//    }
-//    
-//    func metaProgress(meta: Metas){
-//        var count: Double = 0
-//        for todo in meta.toDos!{
-//            if todo.isDone == true{
-//                count += 1
-//            }
-//        }
-//        meta.atual = count
-//        CoreDataController.shared.saveContext()
-//    }
+    func addToDoInMeta(meta: Metas, toDos: [ToDo]){
+        meta.toDos = NSSet(array: toDos)
+
+        CoreDataController.shared.saveContext()
+    }
+
+    
+    func metaProgress(meta: Metas){
+        let todos = meta.toDos.flatMap {
+            $0.allObjects as? [ToDo]
+        }
+        
+        var count: Double = 0
+        if let todos = todos {
+            for todo in todos {
+                if todo.isDone == true{
+                    count += 1
+                }
+            }
+        }
+        else {
+            print("NO TODOS")
+        }
+        meta.atual = count
+        CoreDataController.shared.saveContext()
+    }
+    
 }
