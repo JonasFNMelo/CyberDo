@@ -39,6 +39,7 @@ class MetasModel: ObservableObject {
     
     func addToDoInMeta(meta: Metas, toDos: [ToDo]){
         meta.toDos = NSSet(array: toDos)
+        
 
         CoreDataController.shared.saveContext()
     }
