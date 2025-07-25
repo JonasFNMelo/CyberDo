@@ -11,9 +11,11 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var toDoModel = HomeViewModel()
+    @ObservedObject var userModel = UserModel()
+    @ObservedObject var metaModel = MetasModel()
     
     var body: some View {
- //Tab Bar
+        //Tab Bar
         TabView {
             HomeView(toDoModel: toDoModel)
                 .tabItem {
@@ -31,8 +33,20 @@ struct ContentView: View {
         }
         .onAppear{
             toDoModel.getToDo()
+            userModel.createUser()
+            metaModel.getMeta()
+//            deleteAll()
         }
         
+    }
+    
+    func deleteAll() {
+        for todo in toDoModel.toDos{
+            toDoModel.deleteToDo(todo)
+        }
+        for meta in metaModel.metas{
+            metaModel.deleteMeta(meta)
+        }
     }
 }
 

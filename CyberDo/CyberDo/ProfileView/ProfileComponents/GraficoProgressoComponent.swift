@@ -11,24 +11,14 @@ import SwiftUI
 struct GraficoProgressoComponent: View {
     
     
-    
-    //    @State var currentXP: Double
-    
-    //    var titulo: String
-    //    var maxXP: Double
-    //    var categoria:String
-    
-    @State var colorBar: Color = .verde
     @ObservedObject var toDoModel = HomeViewModel()
     @ObservedObject var metaModel = MetasModel()
 
+    @State var colorBar: Color = .verde
     @State var toDos: [ToDo] = []
-
-    var meta: Metas
     
-    var progress: Double {
-        min(meta.atual / meta.maximo, 1.0)
-    }
+    var meta: Metas
+
     
     var body: some View {
         
@@ -38,7 +28,7 @@ struct GraficoProgressoComponent: View {
             Text(meta.titulo ?? "")
                 .font(.sfMono(fontStyle: .headline, fontWeight: .bold))
                 .foregroundColor(colorBar)
-            
+
             ZStack (alignment: .leading) {
                 
                 //Retangulo com baixa opacidade para mostrar progresso restante
@@ -52,37 +42,38 @@ struct GraficoProgressoComponent: View {
                 Rectangle()
                     .cornerRadius(100)
                     .foregroundColor(colorBar)
-                    .frame(width: 380 * progress, height: 15)
+                    .frame(width: 380 * min(meta.atual / meta.maximo, 1.0), height: 15)
             }
         }
         .onAppear{
             colorBar = DefineColor()
             toDos = filterToDo()
             metaModel.addToDoInMeta(meta: meta, toDos: toDos)
+            metaModel.metaProgress(meta: meta)
         }
     }
     func DefineColor() -> Color{
         switch meta.categoria {
-        case "Destreza":
-            return Color.majenta
-        case "Inteligência":
-            return Color.azul
-        case "Resistencia":
-            return Color.vermelho
-        case "Vitalidade":
-            return Color.verde
-        case "Sintonia":
-            return Color.majenta
-        case "Vigor":
-            return Color.verde
-        case "Fé":
-            return Color.amarelo
-        case "Força":
-            return Color.vermelho
+            case "Destreza":
+                return Color.majenta
+            case "Inteligência":
+                return Color.azul
+            case "Resistencia":
+                return Color.vermelho
+            case "Vitalidade":
+                return Color.verde
+            case "Sintonia":
+                return Color.majenta
+            case "Vigor":
+                return Color.verde
+            case "Fé":
+                return Color.amarelo
+            case "Força":
+                return Color.vermelho
             
-        default:
-            return Color.verde
-            
+            default:
+                return Color.verde
+
         }
     }
     
@@ -91,16 +82,15 @@ struct GraficoProgressoComponent: View {
         
         toDoModel.getToDo()
         for todo in toDoModel.toDos{
-            if todo.categoria == meta.categoria{
+            if todo.categoria == meta.categoria && todo.isDone == true{
                 todos.append(todo)
             }
         }
         return todos
     }
-    
 }
 
 
-//#Preview {
+//#Preview {  
 //    GraficoProgressoComponent()
 //}

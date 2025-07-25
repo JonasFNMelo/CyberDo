@@ -9,12 +9,15 @@ import SwiftUI
 
 /// Componente que é responsavel por mostrar ao usuario seus Status
 struct NivelComponent: View {
+    
+    @State var user: User
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 10) {
             
             //Titulo do componente
-            Text("Nivel 5")
+            Text("Nivel \(Int(user.nivel))")
                 .font(.sfMono(fontStyle: .title, fontWeight: .bold))
             
             // exibição dos atributos e dos seus respectiveis niveis 
@@ -28,10 +31,10 @@ struct NivelComponent: View {
                 Spacer()
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("0")
-                    Text("0")
-                    Text("0")
-                    Text("0")
+                    Text("\(Int(user.destreza))")
+                    Text("\(Int(user.inteligencia))")
+                    Text("\(Int(user.resistencia))")
+                    Text("\(Int(user.vitalidade))")
                 }
                 Spacer()
                 
@@ -45,10 +48,10 @@ struct NivelComponent: View {
                 Spacer()
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("0")
-                    Text("0")
-                    Text("0")
-                    Text("0")
+                    Text("\(Int(user.sintonia))")
+                    Text("\(Int(user.vigor))")
+                    Text("\(Int(user.fe))")
+                    Text("\(Int(user.forca))")
                 }
             }
             .font(.sfMono())
@@ -57,6 +60,6 @@ struct NivelComponent: View {
     }
 }
 
-#Preview {
-    NivelComponent()
-}
+//#Preview {
+//    NivelComponent(user:   )
+//}

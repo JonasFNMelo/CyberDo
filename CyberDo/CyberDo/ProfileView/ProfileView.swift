@@ -9,6 +9,9 @@ import SwiftUI
 
 /// Tela que mostra o status do player, sua evolucao, metas e ofenciva 
 struct ProfileView: View {
+    
+    @ObservedObject var metaModel = MetasModel()
+    @ObservedObject var userModel = UserModel()
     var body: some View {
         ScrollView{
             
@@ -19,15 +22,27 @@ struct ProfileView: View {
                     Spacer()
                 }
                 
-                OfencivaComponent(currentXP: 10, maxXP: 30)
                 
-                NivelComponent()
-                    .padding(.top, -130)
+                ForEach(userModel.users) { user in
+                    OfencivaComponent(currentXP: user.ofensiva, maxXP: 30)
+
+                    NivelComponent(user: user)
+                        .padding(.top, -130)
+                }
                 
-                MetasComponent()
+                
+                MetasComponent(metaModel: metaModel)
                 
             }
             .padding()
+            .onAppear{
+                metaModel.getMeta()
+                userModel.getUser()
+                for user in userModel.users{
+                    print(user.nivel)
+
+                }
+            }
         }
     }
 }
