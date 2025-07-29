@@ -7,13 +7,18 @@
 
 import SwiftUI
 
-/// Tela que mostra o status do player, sua evolucao, metas e ofenciva 
+/// Tela que mostra o status do player, sua evolucao, metas e ofenciva
 struct ProfileView: View {
     
-    @ObservedObject var metaModel = MetasModel()
-    @ObservedObject var userModel = UserModel()
+    @ObservedObject var todoModel: HomeViewModel
+    @ObservedObject var metaModel: MetasModel
+    @ObservedObject var userModel: UserModel
+    
+    @State var showModal = false
+    
     var body: some View {
-        ScrollView{
+        
+        ScrollView {
             
             VStack(spacing: 50){
                 
@@ -23,31 +28,49 @@ struct ProfileView: View {
                 }
                 
                 
-                ForEach(userModel.users) { user in
-                    OfencivaComponent(currentXP: user.ofensiva, maxXP: 30)
-
-                    NivelComponent(user: user)
-                        .padding(.top, -130)
-                }
+                OfencivaComponent(userModel: userModel)
                 
                 
-                MetasComponent(metaModel: metaModel)
+                NivelComponent(userModel: userModel)
+                    .padding(.top, -130)
+                
+                
+                MetasComponent(showModal: $showModal, metaModel: metaModel, userModel: userModel)
                 
             }
             .padding()
+            .onChange(of: showModal){
+                profileInicializer()
+            }
             .onAppear{
-                metaModel.getMeta()
-                userModel.getUser()
-                for user in userModel.users{
-                    print(user.nivel)
-
-                }
+                profileInicializer()
             }
         }
+        .refreshable {
+            profileInicializer()
+        }
+    }
+    func profileInicializer(){
+        metaModel.getMeta()
+        userModel.getUser()
+        todoModel.getToDo()
+        
+        for user in userModel.users{
+            userModel.adcionarToDos(user: user, toDos: todoModel.toDos)
+            userModel.adcionarMetas(user: user, metas: metaModel.metas)
+            userModel.xpProgress(user: user)
+            userModel.uparNivel(user: user, toDos: todoModel.toDos)
+            userModel.ofensivaProgress(user: user)
+        }
+        
+        userModel.getUser()
     }
 }
 
 #Preview {
-    ProfileView()
+    @ObservedObject var todoModel = HomeViewModel()
+    @ObservedObject var metaModel = MetasModel()
+    @ObservedObject var userModel = UserModel()
+    ProfileView(todoModel:todoModel , metaModel: metaModel, userModel: userModel)
     
 }

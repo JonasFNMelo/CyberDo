@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         //Tab Bar
         TabView {
-            HomeView(toDoModel: toDoModel)
+            HomeView(toDoModel: toDoModel, metaModel: metaModel, userModel: userModel, )
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
@@ -26,7 +26,7 @@ struct ContentView: View {
                     Label("Achievements", systemImage: "medal")
                 }
             
-            ProfileView()
+            ProfileView(todoModel: toDoModel, metaModel: metaModel, userModel: userModel)
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
@@ -35,7 +35,10 @@ struct ContentView: View {
             toDoModel.getToDo()
             userModel.createUser()
             metaModel.getMeta()
-//            deleteAll()
+            userModel.getUser()
+                        deleteAll()
+            
+            
         }
         
     }
@@ -46,6 +49,9 @@ struct ContentView: View {
         }
         for meta in metaModel.metas{
             metaModel.deleteMeta(meta)
+        }
+        for user in userModel.users {
+            userModel.deleteUser(user)
         }
     }
 }

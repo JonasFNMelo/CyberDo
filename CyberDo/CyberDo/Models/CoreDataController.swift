@@ -49,7 +49,7 @@ class CoreDataController {
     ///   - categoria: Categoria do toDo
     ///   - frequencia: Frequencia na qual esse toDo deve ser realizada
     /// - Returns: Retorna esse mesmo toDo criado
-    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String, prioridade: String) -> ToDo {
+    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String, prioridade: String, data: Date) -> ToDo {
         let toDo = ToDo(context: viewContext)
         
         toDo.nome = nome
@@ -58,7 +58,8 @@ class CoreDataController {
         toDo.categoria = categoria
         toDo.frequencia = frequencia
         toDo.prioridade = prioridade
-                
+        toDo.date = data
+        
         saveContext()
         return toDo
     }
@@ -147,7 +148,7 @@ class CoreDataController {
     ///   - vitalidade: valor inicial de vitalidade
     ///   - xp: valor inicial de xp
     /// - Returns: o proprio User criado
-    func createUser(destreza: Double, fe: Double, forca: Double, inteligencia: Double, nivel: Double, ofensiva: Double, resistencia: Double, sintonia: Double, vigor: Double, vitalidade: Double, xp: Double) -> User {
+    func createUser(destreza: Double, fe: Double, forca: Double, inteligencia: Double, nivel: Double, ofensiva: Double, resistencia: Double, sintonia: Double, vigor: Double, vitalidade: Double, xp: Double, maxXp: Double, ofensivaDays: Double, date: Date) -> User {
         let user = User(context: viewContext)
         
         user.destreza = destreza
@@ -161,7 +162,10 @@ class CoreDataController {
         user.vigor = vigor
         user.vitalidade = vitalidade
         user.xp = xp
-                
+        user.maxXp = maxXp
+        user.ofensivaDays = ofensivaDays
+        user.date = date
+        
         saveContext()
         return user
     }

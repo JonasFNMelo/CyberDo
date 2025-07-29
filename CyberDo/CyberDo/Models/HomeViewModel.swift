@@ -24,7 +24,7 @@ class HomeViewModel: ObservableObject {
     ///   - categoria: Categoria do ToDo
     ///   - frequencia: Frequencia na qual esse ToDo deve ser feito
     func createToDo(nome: String, descricao: String, categoria: String, frequencia: String, prioridade: String) {
-        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria, frequencia: frequencia, prioridade: prioridade)
+        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria, frequencia: frequencia, prioridade: prioridade, data: Date.now)
         self.toDos.append(result)
     }
     

@@ -11,7 +11,9 @@ import SwiftUI
 struct QuestComponent: View {
     
     @ObservedObject var toDoModel = HomeViewModel()
-
+    @ObservedObject var metaModel: MetasModel
+    @ObservedObject var userModel: UserModel
+    
     @State var toDo: ToDo
     @State var colorComponent: Color
     @State private var bio = ""
@@ -48,8 +50,23 @@ struct QuestComponent: View {
                                 
                                 //Botão para definir a conclusão da tarefa
                                 Button {
+                                    metaModel.getMeta()
+                                    userModel.getUser()
+                                    
                                     doneToDo.toggle()
                                     toDoModel.toggleDone(toDo)
+                                    
+                                    for meta in metaModel.metas{
+                                        metaModel.metaProgress(meta: meta)
+                                    }
+                                    
+                                    for user in userModel.users{
+                                        userModel.adcionarToDos(user: user, toDos: toDoModel.toDos)
+                                        userModel.adcionarMetas(user: user, metas: metaModel.metas)
+                                        userModel.xpProgress(user: user)
+                                        userModel.uparNivel(user: user, toDos: toDoModel.toDos)
+                                    }
+                                    
                                 } label: {
                                     if toDo.isDone == false{
                                         Rectangle()

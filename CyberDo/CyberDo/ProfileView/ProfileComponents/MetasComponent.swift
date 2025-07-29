@@ -10,9 +10,9 @@ import SwiftUI
 /// Componente onde o usuario pode acompanhar e criar novas metas
 struct MetasComponent: View {
     
-    @State var showModal: Bool = false
+    @Binding var showModal: Bool
     @ObservedObject var metaModel: MetasModel
-
+    @ObservedObject var userModel: UserModel
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
 
@@ -35,16 +35,17 @@ struct MetasComponent: View {
             
             ForEach(metaModel.metas, id: \.self) { meta in
                 GraficoProgressoComponent(meta: meta)
+                    .onAppear{
+                        metaModel.metaProgress(meta: meta)
+                    }
             }
+            
         }
         .onAppear{
             metaModel.getMeta()
-            for meta in metaModel.metas{
-                print(meta)
-            }
         }
         .sheet(isPresented: $showModal){
-            MetaModalView()
+            MetaModalView(metaModel: metaModel)
         }
     }
 }

@@ -11,11 +11,12 @@ import Charts
 /// Componente que vai medir graficamente a ofenciva de um jogador 
 struct OfencivaComponent: View {
     
-    @State var currentXP: Double
-    var maxXP: Double
+    @State var user: User?
+    @ObservedObject var userModel: UserModel
+    var max: Double = 30
     
     var progress: Double {
-        min(currentXP / maxXP, 1.0)
+        min((user?.ofensivaDays ?? 0) / max, 1.0)
     }
     
     var body: some View {
@@ -36,21 +37,28 @@ struct OfencivaComponent: View {
                 .foregroundColor(.vermelho)
                 .rotationEffect(.degrees(180))
             
-            // texto principal 
-            Text("OFENSIVA")
-                .font(.sfMono(fontStyle: .title, fontWeight: .bold))
-                .foregroundColor(.vermelho)
-                .padding(.bottom, 20)
-            
+            // texto principal
+            VStack{
+                Text("OFENSIVA")
+                    .font(.sfMono(fontStyle: .title, fontWeight: .bold))
+                    .foregroundColor(.vermelho)
+                
+                Text("\(String(format: "%.2f", user?.ofensiva ?? 0))x")
+                    .font(.sfMono(fontStyle: .title, fontWeight: .bold))
+                    .foregroundColor(.vermelho)
+            }
 //            Rectangle()
 //                .frame(width: 280, height: 270)
                 
 
         }
+        .onAppear{
+            user = userModel.users[0]
+        }
         .frame(width: 280, height: 270)
     }
 }
 
-#Preview {
-    OfencivaComponent(currentXP: 5, maxXP: 10)
-}
+//#Preview {
+//    OfencivaComponent()
+//}

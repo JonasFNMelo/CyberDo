@@ -11,6 +11,9 @@ import SwiftUI
 struct HomeView: View {
     
     @ObservedObject var toDoModel = HomeViewModel()
+    @ObservedObject var metaModel: MetasModel
+    @ObservedObject var userModel: UserModel
+
     @State var showModal = false
     @State var filtro: String = "Main"
     @State var toDos: [ToDo] = []
@@ -30,7 +33,8 @@ struct HomeView: View {
                 
                 ForEach(toDos, id: \.self) { todos in
                     
-                    QuestComponent(toDo: todos, colorComponent: .verde, doneToDo: $doneToDo)
+                    QuestComponent(metaModel: metaModel, userModel: userModel, toDo: todos, colorComponent: .verde, doneToDo: $doneToDo)
+//                    QuestComponent(toDo: todos, colorComponent: .verde, doneToDo: $doneToDo)
                 }
             }
             .padding()
@@ -39,5 +43,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    @ObservedObject var metaModel = MetasModel()
+    @ObservedObject var userModel = UserModel()
+    HomeView(metaModel: metaModel, userModel: userModel)
 }

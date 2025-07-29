@@ -9,6 +9,11 @@ import SwiftUI
 
 /// Tela responsavel por exibir ao usuario suas conquistas bloqueadas e desbloqueadas
 struct AchivementView: View {
+    
+    @ObservedObject var todoModel = HomeViewModel()
+    @ObservedObject var userModel = UserModel()
+    @ObservedObject var metaModel = MetasModel()
+    
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){

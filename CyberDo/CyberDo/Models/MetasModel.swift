@@ -61,11 +61,10 @@ class MetasModel: ObservableObject {
         
         let count: Double = Double(todos?.count ?? 0)
         
-        if count == 0 {
-            print("NO TODOS")
-        }
         meta.atual = count
-        print("\(meta.atual)")
+        if meta.atual >= meta.maximo{
+            meta.isDone = true
+        }
         CoreDataController.shared.saveContext()
     }
 }

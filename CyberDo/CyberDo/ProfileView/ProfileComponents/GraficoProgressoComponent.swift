@@ -48,8 +48,8 @@ struct GraficoProgressoComponent: View {
         .onAppear{
             colorBar = DefineColor()
             toDos = filterToDo()
+            metaModel.getMeta()
             metaModel.addToDoInMeta(meta: meta, toDos: toDos)
-            metaModel.metaProgress(meta: meta)
         }
     }
     func DefineColor() -> Color{
