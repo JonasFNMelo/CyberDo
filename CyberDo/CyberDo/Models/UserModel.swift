@@ -17,6 +17,7 @@ class UserModel: ObservableObject {
         users = CoreDataController.shared.fetchUser()
     }
     
+    func x() -> Bool { return Bool.random() }
     
     /// Função para criar um novo User (o User só pode ser criado uma vez)
     func createUser() {
@@ -67,9 +68,6 @@ class UserModel: ObservableObject {
                 count += 1
             }
         }
-        print("todos: \(String(describing: user.toDos))")
-        print("count: \(count)")
-        
         if (user.date?.dayInt ?? 0) + 1 == Date.now.dayInt{
 //        if (user.date?.distance(to: Date.now) ?? 0) >= TimeInterval(10) {
 
@@ -177,6 +175,5 @@ class UserModel: ObservableObject {
     func deleteUser(_ user: User) {
         CoreDataController.shared.deleteUser(user)
     }
-
     
 }

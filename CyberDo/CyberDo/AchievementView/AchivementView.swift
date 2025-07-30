@@ -13,27 +13,32 @@ struct AchivementView: View {
     @ObservedObject var todoModel = HomeViewModel()
     @ObservedObject var userModel = UserModel()
     @ObservedObject var metaModel = MetasModel()
-    
+    @ObservedObject var jsonData: DataWeb
+    @Binding var isCompleteArray: [Bool]
+    @State var user: User?
+    @State var isComplete: Bool = true
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
                 CabecalhoConquistaComponent()
                     .padding(.top)
-
+                
                 VStack(spacing: 20){
                     
-                    PikerConquistaComponent()
+//                    PikerConquistaComponent()
                     
-                    ConquistaComponent(colorComponent: .verde)
-                    
-                    ConquistaComponent(colorComponent: .majenta)
-                    
-                    ConquistaComponent(colorComponent: .azul)
-                    
-                    ConquistaComponent(colorComponent: .vermelho)
-                    
-                    
+                    ForEach(Array(jsonData.conquistas.enumerated()), id: \.offset){ index, conquista in
+                        ConquistaComponent(userModel: userModel,isComplete: isCompleteArray[index], conquista: conquista)
+                    }
                 }
+            }
+        }
+        .onAppear{
+//            isCompleteToggle(userModel: userModel, conquistas: jsonData.conquistas)
+            
+            userModel.getUser()
+            for usuario in userModel.users{
+                user = usuario
             }
         }
         .onDisappear{
@@ -57,10 +62,12 @@ struct AchivementView: View {
                 
             }
         }
-
+        
     }
 }
 
 #Preview {
-    AchivementView()
+    @Previewable @State var isCompleteArray: [Bool] = []
+    @ObservedObject var jsonData = DataWeb()
+    AchivementView(jsonData: jsonData, isCompleteArray: $isCompleteArray)
 }
