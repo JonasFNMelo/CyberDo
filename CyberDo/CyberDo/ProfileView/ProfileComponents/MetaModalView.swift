@@ -91,6 +91,8 @@ struct MetaModalView: View {
                     } label: {
                         Text("Salvar")
                     }
+                    .disabled(numQuests == 0)
+                    .disabled(categoria == "")
                 }
                 
                 ToolbarItem(placement: .cancellationAction){

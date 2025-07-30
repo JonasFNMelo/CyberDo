@@ -24,6 +24,7 @@ struct ProfileView: View {
                 
                 HStack(){
                     CabecalhoProfileComponent()
+                        .padding(.top)
                     Spacer()
                 }
                 
@@ -38,17 +39,19 @@ struct ProfileView: View {
                 MetasComponent(showModal: $showModal, metaModel: metaModel, userModel: userModel)
                 
             }
-            .padding()
-            .onChange(of: showModal){
-                profileInicializer()
-            }
-            .onAppear{
-                profileInicializer()
-            }
+            
+        }
+        .onChange(of: showModal){
+            profileInicializer()
+        }
+        .onAppear{
+            profileInicializer()
         }
         .refreshable {
             profileInicializer()
         }
+        .padding()
+
     }
     func profileInicializer(){
         metaModel.getMeta()
@@ -64,6 +67,11 @@ struct ProfileView: View {
         }
         
         userModel.getUser()
+        
+        for meta in metaModel.metas{
+            metaModel.metaProgress(meta: meta)
+            metaModel.deleteMeta(meta)
+        }
     }
 }
 

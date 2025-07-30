@@ -18,7 +18,6 @@ struct ModalView: View {
     
     //Variaveis para serem ultilizadas na criação da quest
     @State private var nomeQ: String = ""
-    @State private var frequencia: String = ""
     @State private var descricao: String = ""
     @State private var categoria: String = ""
     @State private var prioridade: String = ""
@@ -47,19 +46,6 @@ struct ModalView: View {
                 
                 TextField("Digite aqui", text: $descricao)
                 
-                Text("Escolha a frequencia da Quest")
-                    .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
-                
-                
-                Grid{
-                    GridRow{
-                        ButtonSheet(valor: $frequencia, tamanho: 120, texto: "diariamente", colorComponent: .accent)
-                    
-                        ButtonSheet(valor: $frequencia, tamanho: 130, texto: "semanalmente", colorComponent: .accent)
-                    
-                        ButtonSheet(valor: $frequencia, tamanho: 120, texto: "mensalmente", colorComponent: .accent)
-                    }
-                }
                 
                 Text("Escolha a categoria da Quest")
                     .font(.sfMono(fontStyle: .title3,fontWeight: .bold))
@@ -109,13 +95,15 @@ struct ModalView: View {
             .toolbar{
                 ToolbarItem(placement: .confirmationAction){
                     Button {
-                        toDoModel.createToDo(nome: nomeQ, descricao: descricao, categoria: categoria, frequencia: frequencia, prioridade: prioridade)
+                        toDoModel.createToDo(nome: nomeQ, descricao: descricao, categoria: categoria, prioridade: prioridade)
                         toDoModel.getToDo()
                         dismiss()
                         
                     } label: {
                         Text("Salvar")
                     }
+                    .disabled(prioridade == "")
+                    .disabled(categoria == "")
                 }
                 
                 ToolbarItem(placement: .cancellationAction){

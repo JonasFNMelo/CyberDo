@@ -49,16 +49,16 @@ class CoreDataController {
     ///   - categoria: Categoria do toDo
     ///   - frequencia: Frequencia na qual esse toDo deve ser realizada
     /// - Returns: Retorna esse mesmo toDo criado
-    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, frequencia: String, prioridade: String, data: Date) -> ToDo {
+    func createToDo(nome: String, descricao: String, isDone: Bool, categoria: String, prioridade: String, data: Date, isCounted: Bool) -> ToDo {
         let toDo = ToDo(context: viewContext)
         
         toDo.nome = nome
         toDo.descricao = descricao
         toDo.isDone = isDone
         toDo.categoria = categoria
-        toDo.frequencia = frequencia
         toDo.prioridade = prioridade
         toDo.date = data
+        toDo.isCounted = isCounted
         
         saveContext()
         return toDo
@@ -98,7 +98,7 @@ class CoreDataController {
     ///   - categoria: categoria da meta
     ///   - atual: quantos toDos ja foram feitos
     /// - Returns: retorna a propria meta criada
-    func creatMeta(xp: Double, titulo: String, maximo: Double, isDone: Bool, categoria:String, atual: Double) -> Metas {
+    func creatMeta(xp: Double, titulo: String, maximo: Double, isDone: Bool, categoria:String, atual: Double, isCounted: Bool) -> Metas {
         let meta = Metas(context: viewContext)
         
         meta.xp = xp
@@ -107,6 +107,7 @@ class CoreDataController {
         meta.isDone = isDone
         meta.categoria = categoria
         meta.atual = atual
+        meta.isCounted = isCounted
         
         saveContext()
         return meta

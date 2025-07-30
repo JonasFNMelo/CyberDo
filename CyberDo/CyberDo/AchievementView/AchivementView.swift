@@ -18,7 +18,8 @@ struct AchivementView: View {
         ScrollView{
             VStack(alignment: .leading){
                 CabecalhoConquistaComponent()
-                
+                    .padding(.top)
+
                 VStack(spacing: 20){
                     
                     PikerConquistaComponent()
@@ -35,6 +36,28 @@ struct AchivementView: View {
                 }
             }
         }
+        .onDisappear{
+            metaModel.getMeta()
+            userModel.getUser()
+            todoModel.getToDo()
+            
+            
+            
+            for user in userModel.users{
+                userModel.adcionarToDos(user: user, toDos: todoModel.toDos)
+                userModel.adcionarMetas(user: user, metas: metaModel.metas)
+                userModel.xpProgress(user: user)
+                userModel.uparNivel(user: user, toDos: todoModel.toDos)
+                userModel.ofensivaProgress(user: user)
+            }
+            
+            for meta in metaModel.metas{
+                metaModel.metaProgress(meta: meta)
+                metaModel.deleteMeta(meta)
+                
+            }
+        }
+
     }
 }
 

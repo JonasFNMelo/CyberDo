@@ -24,14 +24,8 @@ class MetasModel: ObservableObject {
     ///   - maximo: Valor maximo de toDo a serem feitos para concluir a meta
     ///   - categoria: Categoria da meta
     func createMeta(titulo: String, maximo: Double, categoria:String) {
-        let result = CoreDataController.shared.creatMeta(xp: 100, titulo: titulo, maximo: maximo, isDone: false, categoria: categoria, atual: 0)
+        let result = CoreDataController.shared.creatMeta(xp: 100, titulo: titulo, maximo: maximo, isDone: false, categoria: categoria, atual: 0, isCounted: false)
         self.metas.append(result)
-    }
-    
-    /// Deleta uma Meta especifica
-    /// - Parameter meta: meta a ser deletado
-    func deleteMeta(_ meta: Metas) {
-        CoreDataController.shared.deleteMeta(meta)
     }
     
     /// Muda o parametro "isDone" da Meta
@@ -66,5 +60,13 @@ class MetasModel: ObservableObject {
             meta.isDone = true
         }
         CoreDataController.shared.saveContext()
+    }
+    
+    /// Deleta uma Meta especifica
+    /// - Parameter meta: meta a ser deletado
+    func deleteMeta(_ meta: Metas) {
+        if meta.isCounted == true{
+            CoreDataController.shared.deleteMeta(meta)
+        }
     }
 }

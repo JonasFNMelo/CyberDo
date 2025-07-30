@@ -10,6 +10,10 @@ import SwiftUI
 /// ContentView é a "Main" do codigo, atraves dela é possivel acessar todas as telas e navegar com a tab bar
 struct ContentView: View {
     
+    init(){
+        LocalNotifications.AddNotification(title: "Suas Quests estão com sdds de vc", subtitle: "as metas nem tanto", body: "elas não vao ser feitas sozinhas 🤨", hour: 10, minute: 35, interval: 259200)
+    }
+    
     @ObservedObject var toDoModel = HomeViewModel()
     @ObservedObject var userModel = UserModel()
     @ObservedObject var metaModel = MetasModel()
@@ -36,7 +40,10 @@ struct ContentView: View {
             userModel.createUser()
             metaModel.getMeta()
             userModel.getUser()
-                        deleteAll()
+            toDoModel.toggleDoneAfterADay()
+//            LocalNotifications.getScheduledNotifications()
+
+
             
             
         }
@@ -48,11 +55,14 @@ struct ContentView: View {
             toDoModel.deleteToDo(todo)
         }
         for meta in metaModel.metas{
+            meta.isCounted = true
             metaModel.deleteMeta(meta)
         }
         for user in userModel.users {
             userModel.deleteUser(user)
         }
+        LocalNotifications.removeNotification()
+
     }
 }
 

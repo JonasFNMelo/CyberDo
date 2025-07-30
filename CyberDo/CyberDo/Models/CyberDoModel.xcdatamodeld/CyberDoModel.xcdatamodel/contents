@@ -3,6 +3,7 @@
     <entity name="Metas" representedClassName="Metas" syncable="YES" codeGenerationType="class">
         <attribute name="atual" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="categoria" optional="YES" attributeType="String"/>
+        <attribute name="isCounted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="maximo" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
@@ -15,6 +16,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="descricao" optional="YES" attributeType="String"/>
         <attribute name="frequencia" optional="YES" attributeType="String"/>
+        <attribute name="isCounted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="nome" optional="YES" attributeType="String"/>
         <attribute name="prioridade" optional="YES" attributeType="String"/>

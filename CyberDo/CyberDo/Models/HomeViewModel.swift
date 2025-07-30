@@ -23,8 +23,8 @@ class HomeViewModel: ObservableObject {
     ///   - descricao: Descrição do ToDo
     ///   - categoria: Categoria do ToDo
     ///   - frequencia: Frequencia na qual esse ToDo deve ser feito
-    func createToDo(nome: String, descricao: String, categoria: String, frequencia: String, prioridade: String) {
-        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria, frequencia: frequencia, prioridade: prioridade, data: Date.now)
+    func createToDo(nome: String, descricao: String, categoria: String, prioridade: String) {
+        let result = CoreDataController.shared.createToDo(nome: nome, descricao: descricao, isDone: false, categoria: categoria,prioridade: prioridade, data: Date.now, isCounted: false)
         self.toDos.append(result)
     }
     
@@ -42,6 +42,14 @@ class HomeViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
+    func toggleDoneAfterADay(){
+        for todo in toDos{
+            if (todo.date?.dayInt ?? -1) + 1 == Date.now.dayInt{
+                todo.isDone = false
+                todo.isCounted = false
+            }
+        }
+    }
 }
 
 

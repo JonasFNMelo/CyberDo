@@ -11,6 +11,7 @@ import CoreData
 /// Classe responsavel por controlar os To Do da tela home
 class UserModel: ObservableObject {
     @Published var users: [User] = []
+    @Published var metaModel = MetasModel()
     /// função responsavel por fazer o fetch de todos os toDo e salva-los na variavel todos
     func getUser() {
         users = CoreDataController.shared.fetchUser()
@@ -66,13 +67,16 @@ class UserModel: ObservableObject {
                 count += 1
             }
         }
-//        if (user.date?.dayInt ?? 0) + 1 == Date.now.dayInt{
-        if (user.date?.distance(to: Date.now) ?? 0) >= TimeInterval(10) {
+        print("todos: \(String(describing: user.toDos))")
+        print("count: \(count)")
+        
+        if (user.date?.dayInt ?? 0) + 1 == Date.now.dayInt{
+//        if (user.date?.distance(to: Date.now) ?? 0) >= TimeInterval(10) {
 
             user.date = Date.now
             if count == todos?.count && user.ofensiva < 30 && count != 0{
                 user.ofensivaDays += 1
-                user.ofensiva = user.ofensivaDays/30 * 1.5
+                user.ofensiva = user.ofensivaDays/30 * 1.5 + 1
             }
             
         }
@@ -121,6 +125,7 @@ class UserModel: ObservableObject {
     }
     
     func xpProgress(user: User){
+        metaModel.getMeta()
         let todos = user.toDos.flatMap {
             $0.allObjects as? [ToDo]
         }
@@ -128,15 +133,25 @@ class UserModel: ObservableObject {
             $0.allObjects as? [Metas]
         }
         
-        user.xp = (Double(50*(todos?.count ?? 0)) + Double(100*(metas?.count ?? 0))) * user.ofensiva
-
+        user.xp += (Double(50*(todos?.count ?? 0)) + Double(100*(metas?.count ?? 0))) * user.ofensiva
+        
+        metas?.forEach { meta in
+            meta.isCounted = true
+        }
+        CoreDataController.shared.saveContext()
+        
+        for meta in metaModel.metas{
+            metaModel.deleteMeta(meta)
+        }
+        
         CoreDataController.shared.saveContext()
     }
     
     func adcionarToDos(user: User, toDos: [ToDo]){
         var toDosCorretos: [ToDo] = []
         for toDo in toDos{
-            if toDo.isDone == true{
+            if toDo.isDone == true && toDo.isCounted == false{
+                toDo.isCounted = true
                 toDosCorretos.append(toDo)
             }
         }
@@ -148,7 +163,7 @@ class UserModel: ObservableObject {
     func adcionarMetas(user: User, metas: [Metas]){
         var metasCorretas: [Metas] = []
         for meta in metas{
-            if meta.isDone == true{
+            if meta.isDone == true && meta.isCounted == false{
                 metasCorretas.append(meta)
             }
         }

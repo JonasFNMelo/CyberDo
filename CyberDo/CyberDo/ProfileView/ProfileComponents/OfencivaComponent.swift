@@ -54,6 +54,7 @@ struct OfencivaComponent: View {
         }
         .onAppear{
             user = userModel.users[0]
+            userModel.ofensivaProgress(user: user!)
         }
         .frame(width: 280, height: 270)
     }

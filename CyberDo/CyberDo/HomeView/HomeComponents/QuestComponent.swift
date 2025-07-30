@@ -17,7 +17,7 @@ struct QuestComponent: View {
     @State var toDo: ToDo
     @State var colorComponent: Color
     @State private var bio = ""
-
+    
     @Binding var doneToDo: Bool
     
     
@@ -50,23 +50,9 @@ struct QuestComponent: View {
                                 
                                 //Botão para definir a conclusão da tarefa
                                 Button {
-                                    metaModel.getMeta()
-                                    userModel.getUser()
-                                    
                                     doneToDo.toggle()
                                     toDoModel.toggleDone(toDo)
-                                    
-                                    for meta in metaModel.metas{
-                                        metaModel.metaProgress(meta: meta)
-                                    }
-                                    
-                                    for user in userModel.users{
-                                        userModel.adcionarToDos(user: user, toDos: toDoModel.toDos)
-                                        userModel.adcionarMetas(user: user, metas: metaModel.metas)
-                                        userModel.xpProgress(user: user)
-                                        userModel.uparNivel(user: user, toDos: toDoModel.toDos)
-                                    }
-                                    
+                
                                 } label: {
                                     if toDo.isDone == false{
                                         Rectangle()
@@ -114,26 +100,26 @@ struct QuestComponent: View {
     }
     func DefineColor() -> Color{
         switch toDo.categoria {
-            case "Destreza":
-                return Color.majenta
-            case "Inteligência":
-                return Color.azul
-            case "Resistencia":
-                return Color.vermelho
-            case "Vitalidade":
-                return Color.verde
-            case "Sintonia":
-                return Color.majenta
-            case "Vigor":
-                return Color.verde
-            case "Fé":
-                return Color.amarelo
-            case "Força":
-                return Color.vermelho
+        case "Destreza":
+            return Color.majenta
+        case "Inteligência":
+            return Color.azul
+        case "Resistencia":
+            return Color.vermelho
+        case "Vitalidade":
+            return Color.verde
+        case "Sintonia":
+            return Color.majenta
+        case "Vigor":
+            return Color.verde
+        case "Fé":
+            return Color.amarelo
+        case "Força":
+            return Color.vermelho
             
-            default:
-                return Color.verde
-
+        default:
+            return Color.verde
+            
         }
     }
 }
