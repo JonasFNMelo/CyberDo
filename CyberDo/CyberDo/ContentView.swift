@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     
     init(){
-        LocalNotifications.AddNotification(title: "Suas Quests estão com sdds de vc", subtitle: "as metas nem tanto", body: "elas não vao ser feitas sozinhas 🤨", hour: 10, minute: 35, interval: 259200)
+        LocalNotifications.AddNotification(title: "Suas Quests estão com sdds de vc", subtitle: "as metas nem tanto", body: "elas não vao ser feitas sozinhas 🤨", hour: 10, minute: 30, interval: 259200)
     }
     
     @State var isCompleteArray: [Bool] = []
@@ -50,6 +50,7 @@ struct ContentView: View {
                 userModel.getUser()
                 isCompleteToggle(userModel: userModel, conquistas: jsonData.conquistas)
             }
+            LocalNotifications.permissaoNotification()
             toDoModel.getToDo()
             userModel.createUser()
             metaModel.getMeta()
@@ -63,6 +64,8 @@ struct ContentView: View {
         
     }
     
+    
+    /// Função que limpa tudo que tenha na memoria do app
     func deleteAll() {
         for todo in toDoModel.toDos{
             toDoModel.deleteToDo(todo)
@@ -75,9 +78,12 @@ struct ContentView: View {
             userModel.deleteUser(user)
         }
         LocalNotifications.removeNotification()
-        
     }
     
+    /// Função que verifica se uma conquista foi feita ou não
+    /// - Parameters:
+    ///   - userModel: userModel, para poder verificar os atributos do usuario
+    ///   - conquistas: lista de conquista, para verificar se a conquista foi feita ou não
     func isCompleteToggle(userModel: UserModel, conquistas: [Conquista]){
         isCompleteArray.removeAll()
         userModel.getUser()

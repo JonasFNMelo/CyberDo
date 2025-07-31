@@ -7,6 +7,7 @@
 import Foundation
 
 
+/// struct de conquista, serve para poder decodificar o json e usar seu conteudo
 struct Conquista: Codable{
     let nome: String
     let descricao: String
@@ -15,16 +16,21 @@ struct Conquista: Codable{
 
 }
 
+/// Enum que retorna erros ao tentar fazer uma requisição get
 enum RequestError: Error {
     case invalidURL
     case errorRequest(error: String)
 }
 
+/// Classe que faz a requisição get e a converte para um array
 class DataWeb: ObservableObject{
     
     @Published var conquistas: [Conquista] = []
     
-    func fetchData(urls: String) async throws -> Result<[Conquista], RequestError> {
+    /// função que puxa os dados da web
+    /// - Parameter urls: url onde estao os dados
+    /// - Returns: retorna uma lista de conquista, que sera armazenada na variavel conquistas da classe
+    private func fetchData(urls: String) async throws -> Result<[Conquista], RequestError> {
         
         guard let url = URL(string: urls) else {
             return .failure(.invalidURL)
@@ -42,6 +48,8 @@ class DataWeb: ObservableObject{
         
     }
     
+    /// Função que trata os possiveis erros ao tentar puxar um dado da web
+    /// - Parameter url: url onde esse dado se encontra
     func getData(url: String) async{
         
         do {

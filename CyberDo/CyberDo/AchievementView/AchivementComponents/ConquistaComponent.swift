@@ -80,6 +80,8 @@ struct ConquistaComponent: View {
         .foregroundColor(colorComponent)
     }
     
+    /// Função que define a cor da conquista
+    /// - Returns: Cor que vai ser utilizada na conquista
     func DefineColor() -> Color{
         switch conquista.categoria {
         case "Destreza":

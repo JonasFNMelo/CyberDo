@@ -11,6 +11,7 @@ import Foundation
 
 /// Classe que controla o coreData
 class CoreDataController {
+    
     static let shared = CoreDataController()
     
     let persistentContainer: NSPersistentContainer

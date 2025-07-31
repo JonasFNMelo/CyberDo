@@ -11,6 +11,14 @@ import SwiftUI
 
 struct LocalNotifications {
     
+    /// Esta função é responsavel por agendar notificações com um intervalo expecifico, além disso ela só agenda caso não tenha nenhuma outra notificação agendada
+    /// - Parameters:
+    ///   - title: titulo da notificação
+    ///   - subtitle: subtitulo da notificação
+    ///   - body: corpo da notificação
+    ///   - hour: hora em que a notificação vai tocar
+    ///   - minute: minuto em que a notificação vai tocar
+    ///   - interval: intervalo entre notificações
     public static func AddNotification(title: String, subtitle: String, body: String, hour: Int, minute: Int, interval: Double) {
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
                 if requests.isEmpty {
@@ -52,12 +60,14 @@ struct LocalNotifications {
         }
     }
     
+    /// função que remove todas as notificações agendadas
     public static func removeNotification() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
     }
-
+    
+    /// Função que pede permissão para o usuario para poder mandar notificações, se aceita ela ja agenda algumas notificações
     public static func permissaoNotification() {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { status, error in
@@ -65,11 +75,12 @@ struct LocalNotifications {
                 fatalError("[ERROR]: Unable to request permissions for notifications (\(error.localizedDescription))")
             }
             if status {
-                AddNotification(title: "Suas Quests estão com sdds de vc", subtitle: "as metas nem tanto", body: "elas não vao ser feitas sozinhas 🤨", hour: 17, minute: 28, interval: 2000)
+                AddNotification(title: "Suas Quests estão com sdds de vc", subtitle: "as metas nem tanto", body: "elas não vao ser feitas sozinhas 🤨", hour: 10, minute: 35, interval: 259200)
             }
         }
     }
     
+    ///Função que printa todas as notificações agendadas
     public static func getScheduledNotifications() {
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             if requests == []{

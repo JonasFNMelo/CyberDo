@@ -52,6 +52,8 @@ struct GraficoProgressoComponent: View {
             metaModel.addToDoInMeta(meta: meta, toDos: toDos)
         }
     }
+    /// função que define a cor do componente do grafico
+    /// - Returns: Cor do grafico
     func DefineColor() -> Color{
         switch meta.categoria {
             case "Destreza":
@@ -77,6 +79,8 @@ struct GraficoProgressoComponent: View {
         }
     }
     
+    /// funcao que filtra quais toDos devem upar a quest
+    /// - Returns: retorna a lista ja filtrada de todos 
     func filterToDo() -> [ToDo]{
         var todos: [ToDo] = []
         

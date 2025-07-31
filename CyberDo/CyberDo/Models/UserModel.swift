@@ -81,6 +81,10 @@ class UserModel: ObservableObject {
         CoreDataController.shared.saveContext()
     }
     
+    /// Função que modifica os atributos do usuario conforme vai realizando Quests
+    /// - Parameters:
+    ///   - toDo: todo a ser contabilizado
+    ///   - user: user a ter seus atributos melhorados
     private func uparAtributos(toDo: ToDo, user: User){
         if toDo.isDone == true {
             
@@ -110,6 +114,10 @@ class UserModel: ObservableObject {
         }
     }
     
+    /// Função que faz o upgrade do nivel do usuario
+    /// - Parameters:
+    ///   - user: User a ter o nivel melhorado
+    ///   - toDos: lista de ToDo, para melhorar os atributos do user
     func uparNivel(user: User, toDos: [ToDo]){
         if user.xp >= user.maxXp {
             user.nivel += 1
@@ -122,6 +130,8 @@ class UserModel: ObservableObject {
         }
     }
     
+    /// essa função faz o progresso da barra de xp do user
+    /// - Parameter user: User a ter a quantidade de xp aumentada
     func xpProgress(user: User){
         metaModel.getMeta()
         let todos = user.toDos.flatMap {
@@ -145,6 +155,10 @@ class UserModel: ObservableObject {
         CoreDataController.shared.saveContext()
     }
     
+    /// Função que faz o relationship entre toDo e User
+    /// - Parameters:
+    ///   - user: User que vai ter um relationship
+    ///   - toDos: ToDos a terem um relationship
     func adcionarToDos(user: User, toDos: [ToDo]){
         var toDosCorretos: [ToDo] = []
         for toDo in toDos{
@@ -158,6 +172,10 @@ class UserModel: ObservableObject {
         CoreDataController.shared.saveContext()
     }
     
+    /// Função que faz o relationship entre meta e User
+    /// - Parameters:
+    ///   - user: User que vai ter um relationship
+    ///   - metas: Metas a terem um relationship
     func adcionarMetas(user: User, metas: [Metas]){
         var metasCorretas: [Metas] = []
         for meta in metas{
