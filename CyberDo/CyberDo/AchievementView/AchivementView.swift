@@ -21,7 +21,7 @@ struct AchivementView: View {
     @State var isComplete: Bool = true
     var body: some View {
         
-        ScrollView{
+        ScrollView(showsIndicators: false){
             VStack(alignment: .leading){
                 CabecalhoConquistaComponent()
                     .padding(.top)

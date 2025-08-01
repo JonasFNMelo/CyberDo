@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
             AchivementView(jsonData: jsonData, isCompleteArray: $isCompleteArray)
                 .tabItem {
-                    Label("Achievements", systemImage: "medal")
+                    Label("Conquista", systemImage: "medal")
                 }
             
             ProfileView(todoModel: toDoModel, metaModel: metaModel, userModel: userModel, jsonData: jsonData, isCompleteArray: $isCompleteArray)
@@ -166,3 +166,6 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
+

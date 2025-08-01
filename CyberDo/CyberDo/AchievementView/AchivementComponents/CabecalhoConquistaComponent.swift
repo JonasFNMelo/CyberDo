@@ -16,7 +16,6 @@ struct CabecalhoConquistaComponent: View {
             Text("Conquista")
                 .font(.sfMono(fontStyle: .largeTitle,fontWeight: .bold))
         }
-        .padding()
     }
 }
 
