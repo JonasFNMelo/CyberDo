@@ -1,65 +1,129 @@
+<div align="center">
+
 # CyberDo
 
-Um app de **to-do list gamificado** com estética cyberpunk: cumprir tarefas e metas te dá **XP**, evolui seus **atributos** e desbloqueia **conquistas**.
+### Your routine, in RPG mode. 🕹️
 
-## Sobre o projeto
+CyberDo is a gamified to-do list with a cyberpunk look. Every task is a **quest** tied to
+an RPG attribute, long-term **goals** reward you with XP, and your profile shows your
+level, streak and progress over time — all in a native SwiftUI app.
 
-To-do lists tradicionais funcionam, mas raramente são divertidas. O CyberDo nasceu da ideia de transformar a rotina em algo parecido com um RPG: cada tarefa concluída deixa de ser só um checkmark e passa a ser uma ação que faz seu "personagem" evoluir.
+<br/>
 
-A proposta central é tornar a produtividade **ramificada e progressiva** — você não só marca o que fez, você vê o impacto disso refletido em estatísticas, níveis e conquistas ao longo do tempo.
+[![Platform](https://img.shields.io/badge/iOS-18.5+-000000?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/ios/)
+[![Swift](https://img.shields.io/badge/Swift-5-FA7343?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-0052CC?style=for-the-badge&logo=swift&logoColor=white)](https://developer.apple.com/xcode/swiftui/)
+[![Core Data](https://img.shields.io/badge/Core_Data-3693F3?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/documentation/coredata)
 
-## Funcionalidades
-
-- **Tarefas e metas** organizadas em formato ramificado
-- **Sistema de XP** — cada tarefa cumprida concede pontos de experiência
-- **Atributos** que melhoram conforme você completa diferentes tipos de tarefa
-- **Sistema de conquistas** para marcar marcos importantes da sua jornada
-- Visual com pegada **cyberpunk**, fugindo do look genérico dos apps de produtividade
-
-> 📸 _Screenshots em breve._
-
-## O que este projeto demonstra
-
-- **Persistência com Core Data**: tarefas e metas são entidades do modelo `CyberDoModel`, acessadas por um `CoreDataController` central
-- **MVVM**: ViewModels separados por área (`HomeViewModel`, `MetasModel`, `AchievementViewModel`)
-- **Swift Charts** para visualizar o progresso no perfil
-- **Identidade visual própria** com fontes customizadas e componentes SwiftUI reutilizáveis
-
-## Tecnologias
-
-- Swift 5 · SwiftUI
-- Core Data
-- Swift Charts
-
-## Estrutura do projeto
-
-```
-CyberDo/CyberDo/
-├── HomeView/          # Lista de tarefas e criação de tarefas
-├── ProfileView/       # Nível, metas, ofensiva e gráfico de progresso
-├── AchievementView/   # Conquistas
-├── Models/            # CoreDataController, ViewModels e modelo Core Data
-└── Font/              # Fontes customizadas
-```
-
-## Requisitos
-
-- Xcode 16 ou superior
-- iOS 18.5 ou superior
-
-## Como rodar
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/JonasFNMelo/CyberDo.git
-   ```
-2. Abra `CyberDo/CyberDo.xcodeproj` no **Xcode**.
-3. Selecione um simulador de iPhone e execute (`⌘R`).
-
-## Autor
-
-- [**Jonas Melo**](https://github.com/JonasFNMelo)
+</div>
 
 ---
 
-> Sua rotina, em modo RPG. 🕹️
+## 📑 Table of Contents
+
+- [About](#-about)
+- [Features](#-features)
+- [How It Works](#-how-it-works)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Authors](#-authors)
+
+---
+
+## 📖 About
+
+Traditional to-do lists work, but they're rarely fun. CyberDo turns your routine into
+something closer to an RPG: a finished task stops being just a checkmark and becomes an
+action that levels up your character.
+
+Each quest belongs to an attribute — **Strength, Dexterity, Vitality, Vigor, Endurance,
+Intelligence, Faith** or **Attunement** — so you can see which side of your life you've
+been training, and the neon, monospaced cyberpunk visual identity keeps it far from the
+generic productivity-app look.
+
+---
+
+## 🚀 Features
+
+- **⚔️ Quests** — create tasks with a frequency (daily, weekly or monthly), an attribute and a priority (**Main** or **Side** quest).
+- **🎯 Goals** — longer-term goals with a target and current progress, each worth XP when completed.
+- **🔥 Streak** — a custom-drawn gauge on the profile that fills up as you earn XP.
+- **📈 Profile** — level, goals and a progress chart drawn with SwiftUI shapes.
+- **🏅 Achievements** — a dedicated screen for the milestones of your journey.
+- **🌃 Cyberpunk identity** — custom SF Mono typography and a neon color palette.
+
+---
+
+## ⚙️ How It Works
+
+1. **Create a quest** on the home screen and choose its frequency, attribute and priority.
+2. **Complete quests** to check them off your list.
+3. **Set goals** on the profile and track their progress.
+4. **Follow your streak and level** on the profile screen.
+5. **Check your achievements** on the achievements screen.
+
+Under the hood, quests and goals are Core Data entities in the `CyberDoModel` model,
+managed by a single `CoreDataController`. Each area of the app has its own view model
+(`HomeViewModel`, `MetasModel`, `AchievementViewModel`), and the SwiftUI screens are
+built from small reusable components.
+
+---
+
+## 🛠️ Tech Stack
+
+| Area | Tech |
+|------|------|
+| UI | SwiftUI |
+| Persistence | Core Data |
+| Typography | SF Mono (custom fonts) |
+| Architecture | MVVM |
+
+---
+
+## 📂 Project Structure
+
+```
+CyberDo/CyberDo/
+├── CyberDoApp.swift      # App entry
+├── HomeView/             # Quest list and quest creation
+├── ProfileView/          # Level, goals, streak and progress chart
+├── AchievementView/      # Achievements
+├── Models/               # CoreDataController, view models, CyberDoModel
+├── Font/                 # SF Mono font files
+└── Assets.xcassets/      # Neon color palette, icons
+```
+
+---
+
+## 🎯 Getting Started
+
+### Requirements
+
+- Xcode 16+
+- iOS 18.5+
+
+### Run
+
+```bash
+git clone https://github.com/JonasFNMelo/CyberDo.git
+cd CyberDo
+open CyberDo/CyberDo.xcodeproj
+```
+
+Then pick an iPhone simulator and run (`⌘R`).
+
+---
+
+## 👥 Authors
+
+<table width="100%">
+  <tr>
+    <td align="center" width="100%">
+      <a href="https://github.com/JonasFNMelo"><img src="https://github.com/JonasFNMelo.png" width="80" alt="Jonas Melo"/></a>
+      <br/><sub><b>Jonas Melo</b></sub><br/>
+      <a href="https://github.com/JonasFNMelo"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"/></a>
+      <a href="https://www.linkedin.com/in/jonas-melo-/"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"/></a>
+    </td>
+  </tr>
+</table>
