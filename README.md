@@ -16,11 +16,36 @@ A proposta central é tornar a produtividade **ramificada e progressiva** — vo
 - **Sistema de conquistas** para marcar marcos importantes da sua jornada
 - Visual com pegada **cyberpunk**, fugindo do look genérico dos apps de produtividade
 
+> 📸 _Screenshots em breve._
+
+## O que este projeto demonstra
+
+- **Persistência com Core Data**: tarefas e metas são entidades do modelo `CyberDoModel`, acessadas por um `CoreDataController` central
+- **MVVM**: ViewModels separados por área (`HomeViewModel`, `MetasModel`, `AchievementViewModel`)
+- **Swift Charts** para visualizar o progresso no perfil
+- **Identidade visual própria** com fontes customizadas e componentes SwiftUI reutilizáveis
+
 ## Tecnologias
 
-- **Swift**
-- **SwiftUI**
-- **Xcode**
+- Swift 5 · SwiftUI
+- Core Data
+- Swift Charts
+
+## Estrutura do projeto
+
+```
+CyberDo/CyberDo/
+├── HomeView/          # Lista de tarefas e criação de tarefas
+├── ProfileView/       # Nível, metas, ofensiva e gráfico de progresso
+├── AchievementView/   # Conquistas
+├── Models/            # CoreDataController, ViewModels e modelo Core Data
+└── Font/              # Fontes customizadas
+```
+
+## Requisitos
+
+- Xcode 16 ou superior
+- iOS 18.5 ou superior
 
 ## Como rodar
 
@@ -28,7 +53,7 @@ A proposta central é tornar a produtividade **ramificada e progressiva** — vo
    ```bash
    git clone https://github.com/JonasFNMelo/CyberDo.git
    ```
-2. Abra o projeto no **Xcode** (recomendado Xcode 15 ou superior).
+2. Abra `CyberDo/CyberDo.xcodeproj` no **Xcode**.
 3. Selecione um simulador de iPhone e execute (`⌘R`).
 
 ## Autor
