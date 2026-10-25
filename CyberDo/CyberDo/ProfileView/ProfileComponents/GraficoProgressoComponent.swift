@@ -11,24 +11,21 @@ import SwiftUI
 struct GraficoProgressoComponent: View {
     
     
-    
-    @State var currentXP: Double
-    
-    var titulo:String
-    var maxXP: Double
+    @ObservedObject var toDoModel = HomeViewModel()
+    @ObservedObject var metaModel = MetasModel()
+
     @State var colorBar: Color = .verde
-    var categoria:String
+    @State var toDos: [ToDo] = []
     
-    var progress: Double {
-        min(currentXP / maxXP, 1.0)
-    }
+    var meta: Metas
+
     
     var body: some View {
         
         VStack (alignment: .leading){
             
             //Titulo da meta
-            Text(titulo)
+            Text(meta.titulo ?? "")
                 .font(.sfMono(fontStyle: .headline, fontWeight: .bold))
                 .foregroundColor(colorBar)
 
@@ -45,15 +42,20 @@ struct GraficoProgressoComponent: View {
                 Rectangle()
                     .cornerRadius(100)
                     .foregroundColor(colorBar)
-                    .frame(width: 380 * progress, height: 15)
+                    .frame(width: 380 * min(meta.atual / meta.maximo, 1.0), height: 15)
             }
         }
         .onAppear{
             colorBar = DefineColor()
+            toDos = filterToDo()
+            metaModel.getMeta()
+            metaModel.addToDoInMeta(meta: meta, toDos: toDos)
         }
     }
+    /// função que define a cor do componente do grafico
+    /// - Returns: Cor do grafico
     func DefineColor() -> Color{
-        switch categoria {
+        switch meta.categoria {
             case "Destreza":
                 return Color.majenta
             case "Inteligência":
@@ -76,9 +78,23 @@ struct GraficoProgressoComponent: View {
 
         }
     }
+    
+    /// funcao que filtra quais toDos devem upar a quest
+    /// - Returns: retorna a lista ja filtrada de todos 
+    func filterToDo() -> [ToDo]{
+        var todos: [ToDo] = []
+        
+        toDoModel.getToDo()
+        for todo in toDoModel.toDos{
+            if todo.categoria == meta.categoria && todo.isDone == true{
+                todos.append(todo)
+            }
+        }
+        return todos
+    }
 }
 
 
-#Preview {
-    GraficoProgressoComponent(currentXP: 5, titulo: "titulo da meta", maxXP: 10, categoria: "Fé")
-}
+//#Preview {  
+//    GraficoProgressoComponent()
+//}

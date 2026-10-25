@@ -1,0 +1,109 @@
+//
+//  LocalNotifications.swift
+//  CyberDo
+//
+//  Created by Jonas Fernando Nascimento Melo on 29/07/25.
+//
+import UserNotifications
+import Foundation
+import CoreData
+import SwiftUI
+
+struct LocalNotifications {
+    
+    /// Esta função é responsavel por agendar notificações com um intervalo expecifico, além disso ela só agenda caso não tenha nenhuma outra notificação agendada
+    /// - Parameters:
+    ///   - title: titulo da notificação
+    ///   - subtitle: subtitulo da notificação
+    ///   - body: corpo da notificação
+    ///   - hour: hora em que a notificação vai tocar
+    ///   - minute: minuto em que a notificação vai tocar
+    ///   - interval: intervalo entre notificações
+    public static func AddNotification(title: String, subtitle: String, body: String, hour: Int, minute: Int, interval: Double) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+                if requests.isEmpty {
+                    let content = UNMutableNotificationContent()
+                    content.title = title
+                    content.subtitle = subtitle
+                    content.body = body
+                    content.sound = UNNotificationSound.default
+                    
+                    var dateNow: Date = Date.now
+                    var dateComponents: DateComponents = Calendar.current.dateComponents([.day, .month, .year], from: dateNow)
+                    
+                    dateComponents.hour = hour
+                    dateComponents.minute = minute
+                    
+                    let timesInMouth: Int = Int(2592000.00 / interval)
+                    
+                    
+                    for _ in 0 ..< timesInMouth{
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                        
+                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        
+                        UNUserNotificationCenter.current().add(request) { error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                print("Notification scheduled")
+                            }
+                        }
+                        
+                        dateNow = dateNow.addingTimeInterval(interval)
+                        
+                        dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: dateNow)
+                        dateComponents.hour = hour
+                        dateComponents.minute = minute
+                    }
+                }
+        }
+    }
+    
+    /// função que remove todas as notificações agendadas
+    public static func removeNotification() {
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
+    }
+    
+    /// Função que pede permissão para o usuario para poder mandar notificações, se aceita ela ja agenda algumas notificações
+    public static func permissaoNotification() {
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { status, error in
+            if !status, let error = error {
+                fatalError("[ERROR]: Unable to request permissions for notifications (\(error.localizedDescription))")
+            }
+            if status {
+                AddNotification(title: "Suas Quests estão com sdds de vc", subtitle: "as metas nem tanto", body: "elas não vao ser feitas sozinhas 🤨", hour: 10, minute: 35, interval: 259200)
+            }
+        }
+    }
+    
+    ///Função que printa todas as notificações agendadas
+    public static func getScheduledNotifications() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            if requests == []{
+                print("No notification")
+            }
+            for request in requests {
+                print("Scheduled Notification ID: \(request.identifier)")
+                print("Title: \(request.content.title)")
+                print("Subtitle: \(request.content.subtitle)")
+                
+                if let calendarTrigger = request.trigger as? UNCalendarNotificationTrigger {
+                    print("Trigger Date Components: \(calendarTrigger)")
+                } else if let timeIntervalTrigger = request.trigger as? UNTimeIntervalNotificationTrigger {
+                    print("Trigger Time Interval: \(timeIntervalTrigger.timeInterval) seconds")
+                }
+                print("---")
+            }
+        }
+    }
+    
+}
+
+
+
+
+

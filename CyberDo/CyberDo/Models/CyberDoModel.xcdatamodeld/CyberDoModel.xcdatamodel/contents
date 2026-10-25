@@ -1,23 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Conquistas" representedClassName="Conquistas" syncable="YES" codeGenerationType="class">
+        <attribute name="nome" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="conquistas" inverseEntity="User"/>
+    </entity>
     <entity name="Metas" representedClassName="Metas" syncable="YES" codeGenerationType="class">
         <attribute name="atual" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="categoria" optional="YES" attributeType="String"/>
+        <attribute name="isCounted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="maximo" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
         <attribute name="xp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="mudarMeta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Metas" inverseName="mudarMeta" inverseEntity="Metas"/>
+        <relationship name="toDos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ToDo" inverseName="meta" inverseEntity="ToDo"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="metas" inverseEntity="User"/>
     </entity>
     <entity name="ToDo" representedClassName="ToDo" syncable="YES" codeGenerationType="class">
         <attribute name="categoria" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="descricao" optional="YES" attributeType="String"/>
         <attribute name="frequencia" optional="YES" attributeType="String"/>
+        <attribute name="isCounted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="nome" optional="YES" attributeType="String"/>
         <attribute name="prioridade" optional="YES" attributeType="String"/>
+        <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Metas" inverseName="toDos" inverseEntity="Metas"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toDos" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="destreza" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fe" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="forca" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="inteligencia" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="maxXp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="nivel" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ofensiva" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ofensivaDays" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="resistencia" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sintonia" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="vigor" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="vitalidade" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="xp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="conquistas" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conquistas" inverseName="user" inverseEntity="Conquistas"/>
+        <relationship name="metas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Metas" inverseName="user" inverseEntity="Metas"/>
+        <relationship name="toDos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ToDo" inverseName="user" inverseEntity="ToDo"/>
     </entity>
 </model>

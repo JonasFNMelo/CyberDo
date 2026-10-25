@@ -29,15 +29,21 @@ struct ButtonSheet: View {
                 }
             }
             else{
+                
                 ZStack{
                     Rectangle()
                         .frame(width: tamanho,height: 40)
                         .cornerRadius(15)
                         .foregroundColor(colorComponent)
+                    
+                    Rectangle()
+                        .frame(width: tamanho - 5,height: 35)
+                        .cornerRadius(13)
+                        .foregroundColor(.checkMark)
                     Text(texto)
-                        .foregroundStyle(.checkMark)
+                        .foregroundStyle(colorComponent)
                 }
-                .opacity(0.70)
+
             }
         }
     }
