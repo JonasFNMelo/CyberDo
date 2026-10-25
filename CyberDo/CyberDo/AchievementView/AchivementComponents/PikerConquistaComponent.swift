@@ -19,19 +19,26 @@ struct PikerConquistaComponent: View {
                 num = 0
             } label: {
                 if num%4 == 0 {
-                    Text("Daily")
+                    Text("Conquistas")
                         .font(.sfMono(fontWeight: .bold))
                         .foregroundColor(.accent)
+                        .padding(.leading, -25)
+
                 }
                 if num%4 != 0 {
-                    Text("Daily")
+                    Text("Conquistas")
                         .font(.sfMono(fontWeight: .semibold))
                         .foregroundColor(.gray)
+                        .padding(.leading, -25)
+
                 }
             }
             Spacer()
 
             Text("|")
+                .bold()
+                .padding(.leading, -15)
+
             
             Spacer()
 
@@ -40,60 +47,18 @@ struct PikerConquistaComponent: View {
                 num = 1
             } label: {
                 if num%4 == 1 {
-                    Text("Weekly")
+                    Text("Done")
                         .font(.sfMono(fontWeight: .bold))
                         .foregroundColor(.accent)
                 }
                 if num%4 != 1 {
-                    Text("Weekly")
-                        .font(.sfMono(fontWeight: .semibold))
-                        .foregroundColor(.gray)
-                }
-            }
-            Spacer()
-
-            Text("|")
-            
-            Spacer()
-
-            Button {
-                num = 2
-            } label: {
-                if num%4 == 2 {
-                    Text("Monthly")
-                        .font(.sfMono(fontWeight: .bold))
-                        .foregroundColor(.accent)
-                }
-                if num%4 != 2 {
-                    Text("Monthly")
-                        .font(.sfMono(fontWeight: .semibold))
-                        .foregroundColor(.gray)
-                }
-            }
-            
-            Spacer()
-
-            Text("|")
-            
-            Spacer()
-
-            Button {
-                num = 3
-            } label: {
-                if num%4 == 3 {
-                    Text("Done")
-                        .font(.sfMono(fontWeight: .bold))
-                        .foregroundColor(.accent)
-                }
-                if num%4 != 3 {
                     Text("Done")
                         .font(.sfMono(fontWeight: .semibold))
                         .foregroundColor(.gray)
                 }
             }
             Spacer()
-
-
+            
         }
         .padding(10)
     }

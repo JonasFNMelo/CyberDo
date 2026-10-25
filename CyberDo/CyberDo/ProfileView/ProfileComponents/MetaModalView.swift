@@ -12,8 +12,8 @@ struct MetaModalView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentation
     
-    @ObservedObject var metaModel = MetasModel()
-    
+    @ObservedObject var metaModel: MetasModel
+
     //Variaveis para serem ultilizadas na criação da quest
     @State private var titulo: String = ""
     @State private var categoria: String = ""
@@ -91,6 +91,8 @@ struct MetaModalView: View {
                     } label: {
                         Text("Salvar")
                     }
+                    .disabled(numQuests == 0)
+                    .disabled(categoria == "")
                 }
                 
                 ToolbarItem(placement: .cancellationAction){
@@ -106,5 +108,6 @@ struct MetaModalView: View {
 }
 
 #Preview {
-    MetaModalView()
+    @ObservedObject var metaModel = MetasModel()
+    MetaModalView(metaModel: metaModel)
 }

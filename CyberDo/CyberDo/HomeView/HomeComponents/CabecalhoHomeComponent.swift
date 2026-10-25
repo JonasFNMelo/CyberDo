@@ -20,6 +20,7 @@ struct CabecalhoHomeComponent: View {
             
             Spacer()
             
+            
             Button {
                 showModal = true
             } label: {

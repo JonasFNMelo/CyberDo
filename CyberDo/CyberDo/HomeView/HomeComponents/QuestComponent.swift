@@ -11,11 +11,13 @@ import SwiftUI
 struct QuestComponent: View {
     
     @ObservedObject var toDoModel = HomeViewModel()
-
+    @ObservedObject var metaModel: MetasModel
+    @ObservedObject var userModel: UserModel
+    
     @State var toDo: ToDo
     @State var colorComponent: Color
     @State private var bio = ""
-
+    
     @Binding var doneToDo: Bool
     
     
@@ -38,9 +40,9 @@ struct QuestComponent: View {
                                 
                                 //Nome e categoria da Quest
                                 VStack (alignment: .leading){
-                                    Text(toDo.nome!)
+                                    Text(toDo.nome ?? "")
                                         .font(.sfMono(fontWeight: .bold))
-                                    Text(toDo.categoria!)
+                                    Text(toDo.categoria ?? "")
                                         .font(.sfMono(fontStyle: .caption,fontWeight: .semibold))
                                 }
                                 
@@ -50,6 +52,7 @@ struct QuestComponent: View {
                                 Button {
                                     doneToDo.toggle()
                                     toDoModel.toggleDone(toDo)
+                
                                 } label: {
                                     if toDo.isDone == false{
                                         Rectangle()
@@ -97,26 +100,26 @@ struct QuestComponent: View {
     }
     func DefineColor() -> Color{
         switch toDo.categoria {
-            case "Destreza":
-                return Color.majenta
-            case "Inteligência":
-                return Color.azul
-            case "Resistencia":
-                return Color.vermelho
-            case "Vitalidade":
-                return Color.verde
-            case "Sintonia":
-                return Color.majenta
-            case "Vigor":
-                return Color.verde
-            case "Fé":
-                return Color.amarelo
-            case "Força":
-                return Color.vermelho
+        case "Destreza":
+            return Color.majenta
+        case "Inteligência":
+            return Color.azul
+        case "Resistencia":
+            return Color.vermelho
+        case "Vitalidade":
+            return Color.verde
+        case "Sintonia":
+            return Color.majenta
+        case "Vigor":
+            return Color.verde
+        case "Fé":
+            return Color.amarelo
+        case "Força":
+            return Color.vermelho
             
-            default:
-                return Color.verde
-
+        default:
+            return Color.verde
+            
         }
     }
 }

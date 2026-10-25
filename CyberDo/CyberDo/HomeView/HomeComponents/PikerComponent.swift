@@ -105,5 +105,6 @@ struct PikerComponent: View {
     @Previewable @State var doneToDo = false
     @Previewable @State var filtro = "Main"
     @Previewable @State var toDos: [ToDo] = []
+
     PikerComponent(filtro: $filtro, toDos: $toDos, showModal: $showModal, doneToDo: $doneToDo)
 }
